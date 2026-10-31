@@ -26,6 +26,13 @@ export const subjects = [
         blurb: 'Recursion trees, the three cases, a drill to memorize the statement, generated practice with guided walkthroughs.',
         storage: 'master',
       },
+      {
+        title: 'Heaps',
+        href: 'dsa/heaps/',
+        meta: '1 chapter',
+        blurb: 'Heap order, complete binary trees stored in an array, insert with up-heap, removeMin with down-heap.',
+        storage: 'heaps',
+      },
     ],
     // Line-art mark for the card: a small tree beside shrinking level-cost bars.
     art: '<svg viewBox="0 0 160 72" aria-hidden="true"><path d="M30 12 16 36M30 12l14 24M16 36 9 60M16 36l7 24" /><circle cx="30" cy="12" r="6" /><circle cx="16" cy="36" r="6" /><circle cx="44" cy="36" r="6" class="dot" /><circle cx="9" cy="60" r="6" /><circle cx="23" cy="60" r="6" /><rect x="74" y="8" width="78" height="10" rx="2" /><rect x="74" y="26" width="56" height="10" rx="2" /><rect x="74" y="44" width="36" height="10" rx="2" /><rect x="74" y="62" width="18" height="6" rx="2" class="dot" /></svg>',
