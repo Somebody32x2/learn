@@ -4,7 +4,7 @@ A visual head start on **Physics II (WashU PHYS 1742)**: the whole semester at a
 lectures land on ideas you have already seen move. Every chapter animates the physics from a small
 model, says in plain words what each equation relates, and ends with a checkpoint.
 
-Live: https://samuelshuster.com/education/physics2/
+Part of [the lessons hub](../README.md): this folder is served at `<hub>/physics2/`.
 
 ## Chapters
 
@@ -20,12 +20,14 @@ Live: https://samuelshuster.com/education/physics2/
 
 ## Run it
 
-Static files, no build, no dependencies. ES modules need http:// (not file://).
+Static files, no build, no dependencies. ES modules need http:// (not file://). From the repository root:
 
 ```sh
-npm start     # http://localhost:5173
+npm start     # http://localhost:5173/physics2/
 npm test      # model tests (Node 22+)
 ```
+
+`npm start` and `npm test` inside `physics2/` work too, for this subject alone.
 
 ## Layout
 
@@ -55,7 +57,7 @@ for `PhysView`; frames sharing the same `draw` function glide between their nume
 Chapters with a script in `tts/script/<chapter id>.js` get a **Listen** button: AI narration (Gemini
 3.8 Flash TTS, voices Achird and Charon, alternating by section) that highlights each paragraph and steps the
 figures as it goes. The scripts are written to be heard: math is spoken ("E equals sigma over epsilon naught"),
-and Gemini cues are inline (`<short pause>`, CAPS for stress); each block points at its page text with `at`.
+and scripts carry no inline Gemini tags (it sometimes speaks them aloud); each block points at its page text with `at`.
 
 ```sh
 node tts/gen.mjs --dry        # what is missing, no calls
@@ -71,15 +73,12 @@ exist. Block starts within a section clip come from word timestamps when Vosk is
 `TTS_PY`/`VOSK_MODEL` in `tts/gen.mjs`), otherwise from pauses. To record a clip again (say, a defect you heard),
 list its hash in `tts/rerecord.json`. `tests/narration.test.js` checks every `at` still exists. How to write a script: `tts/WRITING.md`.
 
-## Deploy
+## Serving and the hub
 
-Coolify app `physics2` (project SamuelShuster.com) builds the `Dockerfile` (nginx) and serves it at
-`samuelshuster.com/education/physics2`; pushes to `main` redeploy through a GitHub webhook. Listed on
-the education homepage (`Somebody32x2/education`, `subjects.js`).
-
-The site is part of the Education PWA: `index.html` links the homepage's `manifest.webmanifest` and registers
-its `sw.js` (scope `/education/`), which caches the site as you use it so it works offline. Anywhere without
-`/education/` above the site (locally, GitHub Pages) those requests 404 and registration fails quietly.
+The hub's `Dockerfile` serves this folder (minus `tests/` and `tts/`) with nginx; `audio/*.mp3` clips are
+cached for good, since their names are content hashes. `index.html` links the hub's `manifest.webmanifest`
+and registers its `sw.js` (scope: the hub's folder), which caches the site as you use it so it works offline.
+Served without the hub above it, those requests 404 and registration fails quietly.
 
 ## License
 

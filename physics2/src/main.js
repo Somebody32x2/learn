@@ -10,7 +10,7 @@ const app = document.getElementById('app');
 const nav = h('nav', { class: 'nav', 'aria-label': 'Chapters' });
 const main = h('main', { class: 'main', id: 'main' });
 const brand = () => h('a', { class: 'brand', href: '#/' }, h('span', { class: 'brand-mark', html: logo() }), h('span', { text: site.title }));
-// The site lives at samuelshuster.com/education/physics2/; one level up is the education homepage.
+// The site is the physics2/ folder of the lessons hub; one level up is the hub's homepage.
 const upLink = () => h('a', { class: 'up-link', href: '../', html: `${icon.arrow}<span>All subjects</span>` });
 
 app.append(

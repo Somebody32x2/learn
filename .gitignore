@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+
+# Narration: raw recordings and the generator's lock (physics2/tts/gen.mjs)
+physics2/tts/.raw/
+physics2/tts/.lock
+
+# Local agent context, never versioned
+CLAUDE.md
+AGENTS.md
+.claude/

@@ -8,5 +8,5 @@ export const site = {
   heroTitle: 'Physics II, <em>seen</em>.', // HTML; <em> renders in muted italic serif
   heroLede:
     'A high-level preview of the whole course: charges and fields, circuits, magnetism and induction, light and optics, and the first quantum ideas. Every chapter shows the idea moving, says in plain words what each equation relates, and ends with a short checkpoint.',
-  repo: 'https://github.com/Somebody32x2/physics2', // 'https://github.com/USER/REPO' shows a "Source on GitHub" link
+  repo: 'https://github.com/Somebody32x2/learn/tree/main/physics2', // a GitHub URL shows a "Source on GitHub" link
 };

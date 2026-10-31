@@ -3,7 +3,7 @@
  * Adding a compartment: make a folder with its own index.html (<html data-site="<storage>">),
  * mount it with shared/shell.js, then add an entry here.
  */
-export const REPO = 'https://github.com/Somebody32x2/dsa';
+export const REPO = 'https://github.com/Somebody32x2/learn/tree/main/dsa';
 
 export const topics = [
   {

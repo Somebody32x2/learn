@@ -1,0 +1,13 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+node_modules
+CLAUDE.md
+AGENTS.md
+.claude
+**/README.md
+**/LICENSE
+**/package.json
+**/tests
+**/tts

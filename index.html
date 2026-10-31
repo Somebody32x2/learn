@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Behind a prefix-stripping proxy, /learn and /learn/ reach the server as the same request;
+         relative URLs only resolve with the slash, so add it before anything else loads. -->
+    <script>if (!/\/$|\.[a-z]+$/i.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0c0b" media="(prefers-color-scheme: dark)" />
+    <title>Learn · Samuel Shuster</title>
+    <meta name="description" content="Interactive lessons by Samuel Shuster: data structures and algorithms, Physics II, with step-through figures, checkpoints and guided practice." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23787774' stroke-width='1.8'%3E%3Cpath d='M3 9.5 12 5l9 4.5-9 4.5z'/%3E%3Cpath d='M7 11.5V16c1.5 1.3 3.2 2 5 2s3.5-.7 5-2v-4.5'/%3E%3C/g%3E%3C/svg%3E" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Learn" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <header class="bar">
+      <a class="home" href="/"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4" /></svg>Home</a>
+      <span class="bar-meta" id="count"></span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Learn</div>
+        <h1>Learning, <em>worked out</em>.</h1>
+        <p class="lede">
+          Interactive lessons I build for the classes I take. Each one is a set of figures you can step through,
+          a checkpoint after every idea, and practice that shows exactly where an answer went wrong.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="reveal">Subjects</h2>
+        <div id="subjects" class="subjects"></div>
+      </section>
+
+      <section>
+        <h2 class="reveal">Study tools</h2>
+        <div id="tools" class="tools reveal"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Samuel Shuster</span>
+      <span>Progress is saved in this browser only.</span>
+    </footer>
+    <noscript><p class="noscript">This page lists its subjects with JavaScript. Direct link: <a href="dsa/">Data Structures &amp; Algorithms</a>.</p></noscript>
+  </body>
+</html>

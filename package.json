@@ -1,0 +1,15 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "Interactive, visual lessons: a hub page and one folder per subject.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "npx --yes serve -l 5173 .",
+    "test": "node --test \"dsa/*/tests/*.test.js\" \"physics2/tests/**/*.test.js\""
+  }
+}

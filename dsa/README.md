@@ -3,7 +3,7 @@
 Interactive lessons on data structures and algorithms. Each topic is a self-contained compartment with
 animated figures you can step through, checkpoint quizzes, and practice that explains mistakes.
 
-**Live site:** https://samuelshuster.com/education/dsa/ (part of [samuelshuster.com/education](https://samuelshuster.com/education/))
+Part of [the lessons hub](../README.md): this folder is served at `<hub>/dsa/`.
 
 | Compartment | Path | What it covers |
 |---|---|---|
@@ -13,24 +13,24 @@ animated figures you can step through, checkpoint quizzes, and practice that exp
 
 ## Run locally
 
-No build step, no dependencies. ES modules need to be served over HTTP:
+No build step, no dependencies. ES modules need to be served over HTTP. From the repository root:
 
 ```sh
-npm start        # http://localhost:5173 (the hub; compartments at /trees/, /master/ and /heaps/)
-npm test         # model tests for every compartment (node:test, Node 22+)
+npm start        # http://localhost:5173/dsa/ (compartments at /dsa/trees/, /dsa/master/, /dsa/heaps/)
+npm test         # model tests for every subject (node:test, Node 22+)
 ```
 
-## Deployment
+`npm start` and `npm test` inside `dsa/` work too, serving or testing this subject alone (the hub's
+manifest and service worker then 404, and registration fails quietly).
 
-Pushes to `main` deploy automatically. Coolify builds the `Dockerfile` (nginx serving the repo as is) and
-serves it at `samuelshuster.com/education/dsa`; the proxy strips that prefix before requests reach nginx.
-Every `index.html` adds the trailing slash itself (relative URLs need it), and `nginx.conf` serves folder
-indexes without nginx's own slash redirect, which would lose the prefix. The hub's "Education" link goes
-one level up, to the education homepage (a separate repo and Coolify app).
+## Serving and the hub
 
-The site is part of the Education PWA: each `index.html` links the homepage's `manifest.webmanifest` and
-registers its `sw.js` (scope `/education/`), which caches lessons as you open them so they work offline.
-Locally (no `/education/` above the site) those requests 404 and registration fails quietly.
+The hub's `Dockerfile` serves this folder as is. Every `index.html` adds the trailing slash itself
+(relative URLs need it), and the hub's `nginx.conf` serves folder indexes without nginx's own slash
+redirect, which would lose a proxy's stripped prefix. The hub link ("All subjects") goes one level up.
+
+Each `index.html` links the hub's `manifest.webmanifest` and registers its `sw.js` (scope: the hub's
+folder), which caches lessons as you open them so they work offline.
 
 ## Layout
 
