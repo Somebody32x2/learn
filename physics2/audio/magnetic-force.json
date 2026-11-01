@@ -239,8 +239,8 @@
    "text": "Put a rectangular loop in a field, and the forces on its two long sides point opposite ways. They don't move the loop anywhere, but they twist it. The torque is N I A B, times the sine of theta: N turns, current I, area A, and theta, the angle between B and the loop's normal. That twist is an electric motor.",
    "src": "audio/bb5dbe2b994f8e55.mp3",
    "start": 21.12,
-   "end": 41.76,
-   "dur": 20.6
+   "end": 41.97,
+   "dur": 20.8
   },
   {
    "section": 3,
@@ -251,9 +251,9 @@
    "step": null,
    "text": "Try it here. Two amps through twenty centimeters of wire, in a field of six tenths of a tesla, feel a force of about a quarter of a newton. Reverse the current with the slider, and the force flips. Then switch to the motor loop, and watch the twist keep it turning.",
    "src": "audio/bb5dbe2b994f8e55.mp3",
-   "start": 41.76,
+   "start": 41.97,
    "end": 57.36,
-   "dur": 15.6
+   "dur": 15.4
   },
   {
    "section": 3,

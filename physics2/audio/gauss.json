@@ -101,8 +101,8 @@
    "text": "In the language of lines: every line that starts inside has to cross out. Every line that ends inside has to cross in. And a line that just passes through crosses in once and out once. So lines out, minus lines in, counts the charge inside.",
    "src": "audio/d2537c89d12675dd.mp3",
    "start": 44.58,
-   "end": 63.04,
-   "dur": 18.5
+   "end": 63.24,
+   "dur": 18.7
   },
   {
    "section": 1,
@@ -113,9 +113,9 @@
    "step": null,
    "text": "Test it here. Drag the blue surface, or the charges. Green dots are lines leaving, and red rings are lines entering. Try pulling a charge just outside the surface, and watch the net count stay put, even though the field on the surface changes.",
    "src": "audio/d2537c89d12675dd.mp3",
-   "start": 63.04,
+   "start": 63.24,
    "end": 79.89,
-   "dur": 16.9
+   "dur": 16.7
   },
   {
    "section": 1,
@@ -158,8 +158,8 @@
    "text": "Switch between them. Around a point or a ball, the surface is a sphere, whose area grows as r squared, so the field falls as one over r squared. Around a line, it's a cylinder, whose side grows as r, so the field falls as one over r. And for a flat sheet, it's a little pillbox, whose ends don't grow at all. So the field is constant.",
    "src": "audio/2108ea9956f7ba44.mp3",
    "start": 23.46,
-   "end": 48.75,
-   "dur": 25.3
+   "end": 49.5,
+   "dur": 26
   },
   {
    "section": 2,
@@ -172,9 +172,9 @@
    "step": null,
    "text": "The sphere result has a bonus. Outside any spherically symmetric charge, a charged ball, a planet, a shell, the field is exactly that of a point charge at the center. Newton needed calculus to prove this for gravity; Gauss makes it one line. And inside a uniform shell, the enclosed charge is zero, so the field is zero.",
    "src": "audio/2108ea9956f7ba44.mp3",
-   "start": 48.75,
+   "start": 49.5,
    "end": 72.38,
-   "dur": 23.6
+   "dur": 22.9
   },
   {
    "section": 3,

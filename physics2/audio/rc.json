@@ -127,8 +127,8 @@
    "text": "After one time constant, the charge has reached sixty-three percent of its final value, and the current has fallen to thirty-seven percent. The two always add up to a hundred percent, because the resistor's and the capacitor's voltages add up to the emf.",
    "src": "audio/d815c86c99406159.mp3",
    "start": 43.47,
-   "end": 58.69,
-   "dur": 15.2
+   "end": 58.89,
+   "dur": 15.4
   },
   {
    "section": 2,
@@ -139,9 +139,9 @@
    "step": 2,
    "text": "After two tau: eighty-six percent. Each tau closes the same fraction, sixty-three percent, of whatever gap is left. So progress slows down.",
    "src": "audio/d815c86c99406159.mp3",
-   "start": 58.69,
+   "start": 58.89,
    "end": 70.68,
-   "dur": 12
+   "dur": 11.8
   },
   {
    "section": 2,
@@ -196,8 +196,8 @@
    "text": "Two classic mistakes. Reading tau as \"the time to fully charge\". After one tau, it's only sixty-three percent charged; full takes about five tau. And unit slips: kilohms times microfarads gives MILLIseconds, not seconds.",
    "src": "audio/3f607fd1e23cc9e9.mp3",
    "start": 28.8,
-   "end": 46.26,
-   "dur": 17.5
+   "end": 46.86,
+   "dur": 18.1
   },
   {
    "section": 3,
@@ -208,9 +208,9 @@
    "step": null,
    "text": "That's R C circuits, and the end of the circuits part. Try the checkpoint below, then on to magnetism.",
    "src": "audio/3f607fd1e23cc9e9.mp3",
-   "start": 46.26,
+   "start": 46.86,
    "end": 53.9,
-   "dur": 7.6
+   "dur": 7
   }
  ]
 }

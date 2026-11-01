@@ -196,8 +196,8 @@
    "text": "Across the second resistor, it drops another four volts, all the way down to zero.",
    "src": "audio/b784ac19a385c6a2.mp3",
    "start": 43.23,
-   "end": 49.39,
-   "dur": 6.2
+   "end": 48.18,
+   "dur": 5
   },
   {
    "section": 3,
@@ -208,9 +208,9 @@
    "step": 4,
    "text": "Back at a: plus twelve, minus eight, minus four, equals zero. Every rise is paid back by drops. And that's what fixes the current: the emf divided by the total resistance, twelve over six, two amps.",
    "src": "audio/b784ac19a385c6a2.mp3",
-   "start": 49.39,
+   "start": 48.18,
    "end": 66.57,
-   "dur": 17.2
+   "dur": 18.4
   },
   {
    "section": 3,

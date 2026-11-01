@@ -114,8 +114,8 @@
    "text": "Here's a network with four resistors on an eighteen volt battery. To find the battery current, we'll replace pieces with single equivalent resistors, one safe step at a time.",
    "src": "audio/6f5e06b55fc401b6.mp3",
    "start": 13.2,
-   "end": 24.2,
-   "dur": 11
+   "end": 24.6,
+   "dur": 11.4
   },
   {
    "section": 2,
@@ -126,9 +126,9 @@
    "step": 1,
    "text": "R two and R three are in series: one path, with nothing branching off between them, so they carry the same current. Resistances add: four plus eight, twelve ohms.",
    "src": "audio/6f5e06b55fc401b6.mp3",
-   "start": 24.2,
+   "start": 24.6,
    "end": 36.75,
-   "dur": 12.6
+   "dur": 12.1
   },
   {
    "section": 2,
@@ -302,8 +302,8 @@
    "text": "A few classic mistakes. Sign errors in the loop rule: the sign of an I R term depends on whether you walk with or against the current you labeled, not on the direction of the loop. When a current comes out negative, don't re-solve: the size is right, it just flows the other way. And meters: an ammeter goes in series, so the current passes through it, and a voltmeter goes in parallel, across the element.",
    "src": "audio/34d1a007572d3ca8.mp3",
    "start": 0,
-   "end": 29.52,
-   "dur": 29.5
+   "end": 28.02,
+   "dur": 28
   },
   {
    "section": 4,
@@ -314,9 +314,9 @@
    "step": null,
    "text": "That's D C circuits. Try the checkpoint below, then on to R C circuits.",
    "src": "audio/34d1a007572d3ca8.mp3",
-   "start": 29.52,
+   "start": 28.02,
    "end": 35.14,
-   "dur": 5.6
+   "dur": 7.1
   }
  ]
 }

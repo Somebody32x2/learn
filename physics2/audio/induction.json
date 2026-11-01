@@ -1,0 +1,302 @@
+{
+ "chapter": "induction",
+ "blocks": [
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "In 1831 Faraday found the reverse"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "So far, currents made magnetic fields. In eighteen thirty-one, Faraday found the reverse: a changing magnetic field makes a current. Move a magnet near a coil of wire, and a current flows, with no battery anywhere. This is electromagnetic induction, and it's how nearly all electric power is generated.",
+   "src": "audio/7a8d51f571ae0ea9.mp3",
+   "start": 0,
+   "end": 21.84,
+   "dur": 21.8
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "The quantity that matters is the"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The quantity that matters is the magnetic flux through a loop: how much field passes through the area it encloses. It's the same idea as electric flux in Gauss's law, but now through a surface bounded by a wire.",
+   "src": "audio/7a8d51f571ae0ea9.mp3",
+   "start": 21.84,
+   "end": 35.88,
+   "dur": 14
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "area enclosed by the loop"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Magnetic flux equals B, times A, times the cosine of theta, where theta is the angle between B and the loop's normal. It's largest when the loop faces the field, and zero when the loop is edge-on. Flux is measured in webers: tesla square meters.",
+   "src": "audio/7a8d51f571ae0ea9.mp3",
+   "start": 35.88,
+   "end": 53.22,
+   "dur": 17.3
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "number of turns in the coil"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "And Faraday's law: the induced emf equals minus N, times the rate of change of the flux. So the emf depends on how fast the flux changes, times the number of turns. A huge steady flux induces nothing. A small flux that changes quickly induces a lot. Change B, change the area, or change the angle: any of the three works.",
+   "src": "audio/7a8d51f571ae0ea9.mp3",
+   "start": 53.22,
+   "end": 79.05,
+   "dur": 25.8
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "The minus sign is"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The minus sign is Lenz's law. The induced current flows in the direction whose own magnetic field opposes the change in flux. Flux increasing? The induced field points against it. Flux decreasing? The induced field points along it, trying to keep it up. It's energy conservation in disguise. If the induced current helped the change, a tiny nudge would run away into free energy.",
+   "src": "audio/7a8d51f571ae0ea9.mp3",
+   "start": 79.05,
+   "end": 102.86,
+   "dur": 23.8
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "A magnet, a coil, and a meter",
+   "step": null,
+   "text": "Watch a magnet go into a coil, wait, come out, and wait. On the right, the purple curve is the flux through the coil, and the teal curve is the induced emf. The emf only appears while the magnet moves. And while it moves, the coil becomes a magnet itself: its near face repels the incoming magnet, and attracts the outgoing one. That's Lenz's law, and it's why you have to do work to generate the current. Try the faster speed, and flip the magnet around.",
+   "src": "audio/084e46153faa18d1.mp3",
+   "start": 0,
+   "end": 37.2,
+   "dur": 37.2
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [
+    "Change is what counts"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The lesson: change is what counts. The emf comes from the rate of change of flux. A magnet sitting still inside a coil, however strong, induces nothing. Move it twice as fast, and the emf doubles, for half as long. And the induced current always opposes the change that caused it.",
+   "src": "audio/084e46153faa18d1.mp3",
+   "start": 37.2,
+   "end": 57.29,
+   "dur": 20.1
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "The flux can also change because the"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The flux can also change because the area changes. Slide a metal bar along two rails in a field, and the circuit's area grows by L times v every second, so the flux grows by B L v every second. Or, equivalently: the charges in the moving bar feel q v cross B, last chapter's force, and get pushed along the bar. Both views give the same answer.",
+   "src": "audio/043c0c48842cefab.mp3",
+   "start": 0,
+   "end": 24.48,
+   "dur": 24.5
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "length of the moving bar"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "That's motional emf: the emf equals B L v. A conductor of length L, moving at speed v across a field B, has an emf B L v between its ends. Double the speed, double the emf. And the current it drives feels a force that opposes the motion, so you have to keep pushing.",
+   "src": "audio/043c0c48842cefab.mp3",
+   "start": 24.48,
+   "end": 44.73,
+   "dur": 20.2
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: a bar sliding on rails",
+   "step": null,
+   "text": "Here the rails are fifty centimeters apart, closed by a two ohm resistor. At two meters per second in six tenths of a tesla, the emf is six tenths of a volt, driving three tenths of an amp. The field drags back on the bar with about nine hundredths of a newton. Your push supplies exactly the power the resistor turns into heat. Now set v negative... and everything reverses.",
+   "src": "audio/043c0c48842cefab.mp3",
+   "start": 44.73,
+   "end": 68.81,
+   "dur": 24.1
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [
+    "The third way to change flux"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The third way to change flux is to change the angle. Spin a coil in a steady field, and the cosine swings between plus one and minus one, so the flux oscillates, and so does the emf. That's a generator: a motor run backwards. Turn the shaft with steam, water, or wind, and alternating current comes out.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 0,
+   "end": 24,
+   "dur": 24
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 0,
+   "text": "Here's the loop, seen end-on. It faces the field, so the flux is at its maximum. Yet the emf is zero! The two sides are moving along the field lines, not across them.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 24,
+   "end": 37.68,
+   "dur": 13.7
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 1,
+   "text": "Turned forty-five degrees, the flux is down to about seventy-one percent of its maximum, and falling. The sides now cut across the field at an angle, so the emf is about seventy-one percent of its peak.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 37.68,
+   "end": 50.85,
+   "dur": 13.2
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 2,
+   "text": "Edge-on to the field: no flux at all. But this is where the flux is changing fastest, and the sides cut straight across the field. The emf peaks: about seventy-five volts, for a hundred turns of a ten centimeter coil in two tenths of a tesla, at sixty hertz.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 50.85,
+   "end": 70.02,
+   "dur": 19.2
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 3,
+   "text": "Half a turn. The flux is at its maximum again, but negative, since the field now enters the other face. For a moment it isn't changing, so the emf is zero.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 70.02,
+   "end": 81.57,
+   "dur": 11.5
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 4,
+   "text": "Edge-on the other way, the emf peaks again, with the opposite sign. The current in the loop has reversed. That's alternating current: it reverses twice every turn.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 81.57,
+   "end": 92.7,
+   "dur": 11.1
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Generator: flux and emf as the loop turns",
+   "step": 5,
+   "text": "Spinning steadily, the flux follows a cosine, and the emf follows a sine, a quarter cycle behind. Every peak of one lines up with a zero of the other. Every power plant generator works like this; at sixty hertz, the loop turns sixty times a second.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 92.7,
+   "end": 109.7,
+   "dur": 17
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [
+    "The classic trap"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Which brings us to the classic trap. Maximum flux does not mean maximum emf. In the generator, the emf is largest when the flux is zero, because that's when it's changing fastest. And it's zero when the flux is at its peak. The same trap shows up on graphs: the emf is the slope of the flux curve, not its height.",
+   "src": "audio/45041a83ec0b9369.mp3",
+   "start": 109.7,
+   "end": 131.21,
+   "dur": 21.5
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [
+    "Two more applications"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Two more applications. A transformer is two coils wound on one iron core. Alternating current in the primary coil makes a changing flux, and that same flux passes through every turn of the secondary. So each coil's voltage is proportional to its number of turns. A five hundred turn primary on a hundred twenty volts, with a fifty turn secondary, gives twelve volts, and ten times the current, so power in equals power out. That's why the grid runs on A C. And it's why transformers don't work on steady D C: steady current means unchanging flux.",
+   "src": "audio/578cf82dafa8d2c7.mp3",
+   "start": 0,
+   "end": 38.7,
+   "dur": 38.7
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [
+    "are induced currents swirling"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Eddy currents are induced currents swirling inside solid chunks of metal. By Lenz's law they oppose the motion that creates them. So a magnet falls slowly through a copper pipe, and trains use them as brakes. In transformers they waste energy as heat, which is why transformer cores are made of thin, insulated sheets.",
+   "src": "audio/578cf82dafa8d2c7.mp3",
+   "start": 38.7,
+   "end": 60.24,
+   "dur": 21.5
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [],
+   "sel": ".quiz",
+   "figure": null,
+   "step": null,
+   "text": "That's induction. Try the checkpoint below, then on to inductance and oscillations.",
+   "src": "audio/578cf82dafa8d2c7.mp3",
+   "start": 60.24,
+   "end": 65.78,
+   "dur": 5.5
+  }
+ ]
+}
