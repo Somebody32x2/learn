@@ -1,0 +1,298 @@
+{
+ "chapter": "inductance",
+ "blocks": [
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "A coil carrying current makes a magnetic field through itself"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "A coil carrying current makes a magnetic field through itself. If the current changes, that flux changes, and by Faraday's law the coil induces an emf IN itself. By Lenz's law, that emf opposes the change. Increase the current, and the coil pushes back. Cut the current, and the coil tries to keep it going, which is why a switch on a big motor can spark. This self-opposing coil is an inductor.",
+   "src": "audio/a49fa2c533bb873c.mp3",
+   "start": 0,
+   "end": 28.38,
+   "dur": 28.4
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "How strongly a coil does this is its"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "How strongly a coil does this is its inductance, L, measured in henries. It depends only on the coil's geometry and what fills it: more turns, more area, and an iron core all increase it. For a long solenoid, L equals mu naught, n squared, A, times its length. The n is squared because more turns make more flux, and each turn picks up that flux.",
+   "src": "audio/a49fa2c533bb873c.mp3",
+   "start": 28.38,
+   "end": 54.21,
+   "dur": 25.8
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "back emf across the inductor"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The emf across an inductor is minus L, times the rate of change of the current. So it depends on how fast the current is changing, not on the current itself. Steady current: no voltage. Fast change: a large voltage, opposing the change. It's electrical inertia, just like F equals m a resists changes in velocity.",
+   "src": "audio/a49fa2c533bb873c.mp3",
+   "start": 54.21,
+   "end": 75.74,
+   "dur": 21.5
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "energy stored in the magnetic field"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Building up a current against that back emf takes work, and the work is stored in the coil's magnetic field: one half L I squared. Double the current, four times the energy. Compare it with one half m v squared, and with the capacitor's one half C V squared.",
+   "src": "audio/a49fa2c533bb873c.mp3",
+   "start": 75.74,
+   "end": 96.94,
+   "dur": 21.2
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 0,
+   "text": "Here's a powerful idea. A mass on a spring and an L C circuit obey the same equation, just with different letters. Learn the dictionary once, and everything you know about oscillators carries over.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 0,
+   "end": 13.83,
+   "dur": 13.8
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 1,
+   "text": "Charge on the capacitor plays the role of position. It's the thing that sloshes back and forth.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 13.83,
+   "end": 19.74,
+   "dur": 5.9
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 2,
+   "text": "Current is the rate of change of charge, just as velocity is the rate of change of position.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 19.74,
+   "end": 26.01,
+   "dur": 6.3
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 3,
+   "text": "Inductance is inertia. A mass resists changes in velocity; an inductor resists changes in current. Neither one cares how fast things are going, only about changing it.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 26.01,
+   "end": 36.53,
+   "dur": 10.5
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 4,
+   "text": "The capacitor is the spring. The more charge you pile on, the harder it pushes back, just like F equals k x. And a small capacitance is a stiff spring, so k corresponds to one over C.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 36.53,
+   "end": 52.11,
+   "dur": 15.6
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 5,
+   "text": "Stored energy: the spring's one half k x squared becomes the capacitor's Q squared over two C, energy in the electric field between the plates.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 52.11,
+   "end": 62.82,
+   "dur": 10.7
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 6,
+   "text": "Energy of motion: one half m v squared becomes one half L I squared, energy in the magnetic field of the coil.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 62.82,
+   "end": 71.82,
+   "dur": 9
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "The analogy, row by row",
+   "step": 7,
+   "text": "So substitute m becomes L, and k becomes one over C, into omega equals the square root of k over m. You get the L C frequency, omega equals one over the square root of L C. No new physics needed.",
+   "src": "audio/cd41cae157b7de59.mp3",
+   "start": 71.82,
+   "end": 88.61,
+   "dur": 16.8
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "Now the RL circuit"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Now the R L circuit: a battery, a resistor, and an inductor in series. Close the switch, and the current can't jump straight to the emf over R, the way it would with a resistor alone. The inductor's back emf holds it back. The current climbs smoothly, quickly at first, then more slowly, with time constant tau equals L over R. After one tau it's reached sixty-three percent of its final value; after five, over ninety-nine. It's the same exponential shape as charging a capacitor.",
+   "src": "audio/70b31e217961bcb3.mp3",
+   "start": 0,
+   "end": 33.81,
+   "dur": 33.8
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: current rising in an RL circuit",
+   "step": null,
+   "text": "Close the switch, and watch the current climb. With half a henry and twenty ohms, tau is twenty-five milliseconds, and the current heads for half an amp. Try a bigger L: it's slower. Then a bigger R: it's faster, but the final current is smaller.",
+   "src": "audio/70b31e217961bcb3.mp3",
+   "start": 33.81,
+   "end": 51.01,
+   "dur": 17.2
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "RL is not RC"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Careful: R L is not R C. In R C, a bigger resistor makes things slower. In R L, tau is L over R, so a bigger resistor makes things faster. And the roles flip at the moment of switching. A capacitor starts out acting like a plain wire, and ends up blocking current. An inductor starts out blocking, with zero current, and ends up acting like a plain wire.",
+   "src": "audio/70b31e217961bcb3.mp3",
+   "start": 51.01,
+   "end": 76.3,
+   "dur": 25.3
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "Now connect a charged capacitor to an inductor"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Now connect a charged capacitor to an inductor, with no resistor. The capacitor starts to discharge through the coil, but the inductor slows the current's growth. By the time the capacitor is empty, the current is at its peak, and the inductor won't let it stop. It keeps pushing charge onto the other plate, until the capacitor is charged the opposite way. Then it all runs back. The energy sloshes between the capacitor's electric field and the inductor's magnetic field, exactly like a mass trading spring energy for kinetic energy.",
+   "src": "audio/874db42a793ad781.mp3",
+   "start": 0,
+   "end": 33.66,
+   "dur": 33.7
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "angular frequency of the oscillation"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The frequency: omega equals one over the square root of L C, and f is omega over two pi. A bigger L, more inertia, or a bigger C, a softer spring, means a slower oscillation. And because of the square root, quadrupling either one only halves the frequency.",
+   "src": "audio/874db42a793ad781.mp3",
+   "start": 33.66,
+   "end": 52.05,
+   "dur": 18.4
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "An LC circuit and its mechanical twin",
+   "step": null,
+   "text": "Here's an L C circuit next to its mechanical twin. With four millihenries and four microfarads, it oscillates at about twelve hundred sixty hertz, slowed way down so you can watch. The middle shows the energy moving between the two fields, and the mass on the right moves in step. Try raising C from four to nine microfarads, and watch the frequency drop to about eight hundred forty hertz.",
+   "src": "audio/874db42a793ad781.mp3",
+   "start": 52.05,
+   "end": 75.53,
+   "dur": 23.5
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "Two kinds of field energy, trading places"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "So, two kinds of field energy, trading places. An L C circuit stores energy alternately in an electric field, charge on the capacitor, and a magnetic field, current in the coil. Charge is at its maximum when the current is zero, and the other way around. And the total stays constant.",
+   "src": "audio/874db42a793ad781.mp3",
+   "start": 75.53,
+   "end": 98.93,
+   "dur": 23.4
+  },
+  {
+   "section": 4,
+   "voice": "Charon",
+   "at": [
+    "Two consequences. First,"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Two consequences. First, tuning. An L C circuit responds strongly only to signals near its own frequency, so turning a radio dial, which changes C, picks one station out of all those in the air. Second, and bigger: the L C circuit trades energy between an electric and a magnetic field. In empty space, a changing E makes B, and a changing B makes E, directly, with no wires... and the pair travels. That's an electromagnetic wave, where the next chapter starts.",
+   "src": "audio/3d7f552650bbf7ca.mp3",
+   "start": 0,
+   "end": 35.04,
+   "dur": 35
+  },
+  {
+   "section": 4,
+   "voice": "Charon",
+   "at": [],
+   "sel": ".quiz",
+   "figure": null,
+   "step": null,
+   "text": "That's inductance and oscillations, and the end of magnetism. Try the checkpoint below, then on to light.",
+   "src": "audio/3d7f552650bbf7ca.mp3",
+   "start": 35.04,
+   "end": 42.46,
+   "dur": 7.4
+  }
+ ]
+}
