@@ -1,0 +1,320 @@
+{
+ "chapter": "rays",
+ "blocks": [
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "you can forget the wave and follow"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "When everything light meets is much bigger than its wavelength, like lenses, mirrors, and windows, you can forget the wave, and follow rays: straight lines along the direction the light travels. This is geometric optics. Interference and diffraction, the next two chapters, are what happens when that approximation fails.",
+   "src": "audio/cbeabdd5510fc125.mp3",
+   "start": 0,
+   "end": 20.19,
+   "dur": 20.2
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "At a smooth surface some light bounces back"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "At a smooth surface, some light bounces back. The law of reflection says the angle of reflection equals the angle of incidence, both measured from the normal, the line perpendicular to the surface. The rest of the light crosses into the new material, where it travels slower. How much slower is the index of refraction, n equals c over v: one for air, one point three three for water, and about one and a half for glass. And because the light changes speed, it changes direction.",
+   "src": "audio/cbeabdd5510fc125.mp3",
+   "start": 20.19,
+   "end": 51.81,
+   "dur": 31.6
+  },
+  {
+   "section": 0,
+   "voice": "Achird",
+   "at": [
+    "indices of refraction on the incoming"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "That's Snell's law: n one sine theta one equals n two sine theta two, with both angles measured from the normal. Going into a slower, higher-n material, light bends toward the normal. Going into a faster one, it bends away. The frequency stays the same across the boundary; the speed and the wavelength drop by the factor n.",
+   "src": "audio/cbeabdd5510fc125.mp3",
+   "start": 51.81,
+   "end": 74.02,
+   "dur": 22.2
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: Snell’s law and total internal reflection",
+   "step": null,
+   "text": "Try it: drag the yellow handle to change the angle. The ray thickness shows how the light splits between reflected and refracted. Start in glass, going into air, and sweep the angle up past the dotted line at about forty-two degrees. Watch the refracted ray vanish.",
+   "src": "audio/6aefeb45520081f5.mp3",
+   "start": 0,
+   "end": 17.73,
+   "dur": 17.7
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [
+    "Going from a"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Here's what happened. Going from a slower medium into a faster one, the refracted ray bends away from the normal. At some incoming angle, it would have to leave at ninety degrees, skimming the surface. That's the critical angle, where sine theta c equals n two over n one. Beyond it there's no refracted ray at all: one hundred percent of the light reflects. This total internal reflection keeps light trapped inside optical fibers for kilometers, and makes diamonds sparkle.",
+   "src": "audio/6aefeb45520081f5.mp3",
+   "start": 17.73,
+   "end": 47.85,
+   "dur": 30.1
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [
+    "The index also depends slightly on wavelength"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The index also depends slightly on wavelength. In glass, violet light has a higher n than red, so it bends more. So a prism fans white light out into its colors. That's dispersion, and it's also why rainbows have red on the outside.",
+   "src": "audio/6aefeb45520081f5.mp3",
+   "start": 47.85,
+   "end": 62.28,
+   "dur": 14.4
+  },
+  {
+   "section": 1,
+   "voice": "Charon",
+   "at": [
+    "Snell in one sentence"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Snell's law in one sentence. Measure angles from the normal. Into higher n, bend toward the normal. Into lower n, bend away, and past the critical angle, nothing gets out. Total internal reflection needs n one bigger than n two.",
+   "src": "audio/6aefeb45520081f5.mp3",
+   "start": 62.28,
+   "end": 81.5,
+   "dur": 19.2
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "Thin lenses and mirrors",
+    "A lens is shaped so that refraction"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Now, thin lenses. A lens is shaped so that refraction at its two curved surfaces sends rays to a common point. A converging lens, thicker in the middle, bends incoming parallel rays so they meet at the focal point, a distance f behind it. A diverging lens, thinner in the middle, spreads parallel rays so they seem to come from a focal point in front of it.",
+   "src": "audio/83bf75a8b12fbe62.mp3",
+   "start": 0,
+   "end": 24.66,
+   "dur": 24.7
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "straight through, undeviated"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "To find an image, trace three easy rays from the tip of the object. A ray coming in parallel to the axis goes out through the far focal point. A ray through the center of the lens goes straight through. And a ray through the near focal point comes out parallel to the axis.",
+   "src": "audio/83bf75a8b12fbe62.mp3",
+   "start": 24.66,
+   "end": 41.46,
+   "dur": 16.8
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "Where the outgoing rays cross is the image"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Where the outgoing rays cross is the image. If they really cross, light actually gets there, and you could put a screen at that spot: a real image. If they spread apart, extend them backward. They seem to come from a point on the object's side: a virtual image, which you can see by looking through the lens, but no screen can catch.",
+   "src": "audio/83bf75a8b12fbe62.mp3",
+   "start": 41.46,
+   "end": 63.17,
+   "dur": 21.7
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [
+    "object distance, + for a real object"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The thin lens equation gives the same answer without drawing: one over f equals one over d o, plus one over d i. And the magnification is minus d i over d o. Watch the signs: f is positive for a converging lens, negative for a diverging one. A negative image distance means a virtual image. And a negative magnification means the image is upside down.",
+   "src": "audio/83bf75a8b12fbe62.mp3",
+   "start": 63.17,
+   "end": 92.25,
+   "dur": 29.1
+  },
+  {
+   "section": 2,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: ray diagram",
+   "step": null,
+   "text": "Drag the object along the axis. The focal length is ten centimeters. At twenty-six centimeters, the image forms at about sixteen centimeters, real, inverted, and a bit smaller. Then switch to the diverging lens, and see if you can make anything other than a small, upright, virtual image.",
+   "src": "audio/83bf75a8b12fbe62.mp3",
+   "start": 92.25,
+   "end": 112.18,
+   "dur": 19.9
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [
+    "Now watch one converging lens as the object walks"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Now watch one converging lens as the object walks in toward it. Five positions cover every case an exam can ask about.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 0,
+   "end": 9.09,
+   "dur": 9.1
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "The object walks toward the lens",
+   "step": 0,
+   "text": "The object starts at three f, far beyond two F. The rays meet at one and a half f, between F and two F on the far side: a real, inverted, smaller image, half the size. That's a camera, or your eye: a distant scene shrinks onto the sensor or retina.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 9.09,
+   "end": 28.59,
+   "dur": 19.5
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "The object walks toward the lens",
+   "step": 1,
+   "text": "Object at two f. The image is at two f too, the same distance on the other side: real, inverted, and the same size. The symmetric case.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 28.59,
+   "end": 39.81,
+   "dur": 11.2
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "The object walks toward the lens",
+   "step": 2,
+   "text": "Object between F and two F. The image moves out to three f and grows: real, inverted, and enlarged, twice the size. A projector works here: small slide, big picture on a far screen.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 39.81,
+   "end": 54.09,
+   "dur": 14.3
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "The object walks toward the lens",
+   "step": 3,
+   "text": "Object AT the focal point. Every ray leaves the lens parallel to the others, so they never meet. There's no image; it's \"at infinity\".",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 54.09,
+   "end": 63.75,
+   "dur": 9.7
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "The object walks toward the lens",
+   "step": 4,
+   "text": "Object inside F. Now the rays spread apart after the lens, and never cross. Trace them backward, and they seem to come from a point on the same side as the object: a virtual, upright, enlarged image, two and a half times the size. That's a magnifying glass.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 63.75,
+   "end": 82.11,
+   "dur": 18.4
+  },
+  {
+   "section": 3,
+   "voice": "Charon",
+   "at": [
+    "Sign conventions are where points are lost"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Sign conventions are where points are lost. Write down the signs before plugging in: f is negative for a diverging lens or a convex mirror, and a negative image distance means a virtual image, not a mistake. A diverging lens always gives a virtual, upright, smaller image, wherever the object is. And never drop the minus sign in the magnification. It's what tells you the image is inverted.",
+   "src": "audio/e7e98036c416b58b.mp3",
+   "start": 82.11,
+   "end": 107.02,
+   "dur": 24.9
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [
+    "follow the same equation with"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Mirrors follow the same equation, with f equal to half the radius of curvature. A concave mirror behaves like a converging lens. A convex mirror, like the passenger-side mirror where \"objects are closer than they appear\", behaves like a diverging one. The only change is that a mirror's real images form in front of it, on the same side as the object.",
+   "src": "audio/ca0419734901699b.mp3",
+   "start": 0,
+   "end": 21.9,
+   "dur": 21.9
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [
+    "muscles change f to focus"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "You use these every day. Your eye: a converging lens makes a real, inverted image on the retina, and muscles change the focal length to focus. A camera does the same onto a sensor, focusing by moving the lens. And a magnifier puts the object just inside F, for a large, upright, virtual image.",
+   "src": "audio/ca0419734901699b.mp3",
+   "start": 21.9,
+   "end": 41.37,
+   "dur": 19.5
+  },
+  {
+   "section": 4,
+   "voice": "Achird",
+   "at": [],
+   "sel": ".quiz",
+   "figure": null,
+   "step": null,
+   "text": "That's reflection, refraction, and lenses. Try the checkpoint below, then on to interference.",
+   "src": "audio/ca0419734901699b.mp3",
+   "start": 41.37,
+   "end": 47.81,
+   "dur": 6.4
+  }
+ ]
+}
