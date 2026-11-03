@@ -1,0 +1,273 @@
+{
+ "chapter": "interference",
+ "blocks": [
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "Rays explain lenses, but not the colors"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Rays explain lenses, but not the colors of a soap bubble, or the stripes behind two narrow slits. For those, you need the fact that light is a wave, and waves obey superposition: where two waves overlap, their fields simply add. Two crests make a bigger crest: that's constructive interference. A crest and a trough cancel: destructive.",
+   "src": "audio/d34f51651d535977.mp3",
+   "start": 0,
+   "end": 24.84,
+   "dur": 24.8
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "Whether two waves from the same source arrive in step"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Whether two waves from the same source arrive in step depends on how much farther one of them traveled. That extra distance is the path difference, delta. Every interference problem in this course comes down to computing delta, and comparing it to the wavelength.",
+   "src": "audio/d34f51651d535977.mp3",
+   "start": 24.84,
+   "end": 41.1,
+   "dur": 16.3
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "order: 0,"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Bright where delta equals m lambda, a whole number of wavelengths. Dark where delta equals m plus a half, times lambda. A whole number of wavelengths late is the same as on time. Half a wavelength late puts crest on trough. And only the path difference matters, not the total distance.",
+   "src": "audio/d34f51651d535977.mp3",
+   "start": 41.1,
+   "end": 60.26,
+   "dur": 19.2
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Two sources, seen from above",
+   "step": null,
+   "text": "Here are two sources, seen from above. The yellow circles are wave crests spreading out. The solid dark curves are always constructive, and the dashed ones always cancel. The strip on the right is what a screen would show. Spread the sources apart, or shorten the wavelength: you get more lines, packed closer together.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 0,
+   "end": 20.61,
+   "dur": 20.6
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "In 1801 Thomas Young sent one beam"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "In eighteen oh one, Thomas Young sent one beam of light through two narrow slits, and saw stripes of light and dark on a far screen. That experiment made the case that light is a wave. One beam through two slits guarantees the two waves start in step, so only the path difference to each point on the screen decides the brightness. Let's follow a point P up the screen.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 20.61,
+   "end": 42.9,
+   "dur": 22.3
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Path difference decides bright or dark",
+   "step": 0,
+   "text": "Point P is straight across from the slits. Both paths have the same length, so the waves arrive crest with crest. That's constructive: the bright central fringe.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 42.9,
+   "end": 52.43,
+   "dur": 9.5
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Path difference decides bright or dark",
+   "step": 1,
+   "text": "Move P up. Now the path from slit two is longer by half a wavelength. Its wave arrives half a cycle late, crest on trough, and they cancel. That's the first dark fringe.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 52.43,
+   "end": 66.27,
+   "dur": 13.8
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Path difference decides bright or dark",
+   "step": 2,
+   "text": "Farther up, the path difference is one whole wavelength. One cycle late is the same as on time, so crest meets crest again: the next bright fringe.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 66.27,
+   "end": 76.71,
+   "dur": 10.4
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Path difference decides bright or dark",
+   "step": 3,
+   "text": "One and a half wavelengths: out of step again, so dark. Bright and dark simply alternate, as the path difference grows by half wavelengths.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 76.71,
+   "end": 86.7,
+   "dur": 10
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Path difference decides bright or dark",
+   "step": 4,
+   "text": "Two wavelengths: bright again. In general, bright where the path difference is m lambda, and dark where it's m plus a half, times lambda.",
+   "src": "audio/013c1db221a17444.mp3",
+   "start": 86.7,
+   "end": 95.33,
+   "dur": 8.6
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "the two paths are nearly parallel"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "With the screen far away, the two paths are nearly parallel, and the path difference is just d sine theta, where theta is the angle to P. So bright fringes are where d sine theta equals m lambda.",
+   "src": "audio/d7ffdf8cedafdba9.mp3",
+   "start": 0,
+   "end": 14.61,
+   "dur": 14.6
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "distance between neighboring bright fringes"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "For small angles, that gives an evenly spaced row of fringes, lambda L over d apart on the screen. A longer wavelength, or a farther screen, spreads them out. Slits farther apart squeeze them together.",
+   "src": "audio/d7ffdf8cedafdba9.mp3",
+   "start": 14.61,
+   "end": 28.86,
+   "dur": 14.3
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: the double-slit pattern",
+   "step": null,
+   "text": "Here's the pattern. With green light at five hundred fifty nanometers, slits fifteen hundredths of a millimeter apart, and a screen a meter and a half away, the fringes are five and a half millimeters apart. The first bright fringe is only about a fifth of a degree off center, which is why the screen has to be so far away. Try red light, and watch the fringes spread.",
+   "src": "audio/d7ffdf8cedafdba9.mp3",
+   "start": 28.86,
+   "end": 50.47,
+   "dur": 21.6
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "The one idea"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "So, the one idea. Compute the path difference, and divide by lambda. A whole number: bright. A half-odd number: dark. For two slits, the path difference is d sine theta, and the fringe spacing, lambda L over d, grows with lambda and L, and shrinks with d.",
+   "src": "audio/d7ffdf8cedafdba9.mp3",
+   "start": 50.47,
+   "end": 71.45,
+   "dur": 21
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "Thin films",
+    "Soap bubbles and oil slicks are colored"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Soap bubbles and oil slicks are colored for the same reason. Light reflects from the top and the bottom of a thin film, and the second reflection travels an extra two n t: down and back through thickness t, in a material where the wavelength is shorter by n. There's one more rule. A reflection off a material with higher n flips the wave by half a wavelength, like a rope pulse bouncing off a fixed end. A reflection off a lower n doesn't.",
+   "src": "audio/6192c7145d5980a5.mp3",
+   "start": 0,
+   "end": 32.01,
+   "dur": 32
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "So count the flips first"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "So count the flips first. With one flip, like a soap film in air, reflection is strongest when two n t equals m plus a half, times lambda. With zero or two flips, like a coating between air and glass, it's strongest when two n t equals m lambda. An anti-reflective coating is a quarter wavelength thick, so the two reflections cancel in the middle of the visible range.",
+   "src": "audio/6192c7145d5980a5.mp3",
+   "start": 32.01,
+   "end": 59.82,
+   "dur": 27.8
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [],
+   "sel": null,
+   "figure": "Sandbox: thin-film colors",
+   "step": null,
+   "text": "Try it. A soap film a hundred twenty nanometers thick reflects most strongly at about six hundred forty nanometers, so it looks red. Slide the thickness, and watch the colors cycle. Then switch to the coating on glass, near a hundred nanometers, and watch the reflection nearly vanish across the middle of the spectrum.",
+   "src": "audio/6192c7145d5980a5.mp3",
+   "start": 59.82,
+   "end": 80.66,
+   "dur": 20.8
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [
+    "Classic mistakes"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Classic mistakes. Forgetting the half-wave flips: count them for each reflection. Low to high n flips; high to low doesn't. Using two t instead of two n t, since the wavelength inside the film is lambda over n. And one to watch for next chapter: the double-slit condition gives bright fringes, while the single-slit formula looks the same but gives dark ones.",
+   "src": "audio/6192c7145d5980a5.mp3",
+   "start": 80.66,
+   "end": 105.96,
+   "dur": 25.3
+  },
+  {
+   "section": 3,
+   "voice": "Achird",
+   "at": [],
+   "sel": ".quiz",
+   "figure": null,
+   "step": null,
+   "text": "That's interference. Try the checkpoint below, then on to diffraction.",
+   "src": "audio/6192c7145d5980a5.mp3",
+   "start": 105.96,
+   "end": 110.3,
+   "dur": 4.3
+  }
+ ]
+}
