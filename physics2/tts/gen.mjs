@@ -191,11 +191,13 @@ function cues(mp3, texts) {
     const best = found.filter((p) => Math.abs(p.t - est) <= win && p.t > starts.at(-1) + 0.5 * len).sort((a, b) => score(b) - score(a))[0];
     let t = best ? best.t : est;
     if (heard) {
+      // Search near the pause or the rate estimate; a long block can drift several seconds from either.
+      const near = (x) => Math.min(Math.abs(x - t), Math.abs(x - est)) <= Math.max(8, 0.4 * len);
       // Where the block's first words are heard: at least 2 of its first 3 words in order, near the estimate.
       const want = tokens(texts[k]).slice(0, 3);
       const hits = heard
         .map((w, i) => ({ i, n: want.filter((x, j) => heard[i + j] && same(heard[i + j].w, x)).length }))
-        .filter(({ i, n }) => n >= 2 && Math.abs(heard[i].s - t) <= 8 && heard[i].s > starts.at(-1) + 0.5 * len)
+        .filter(({ i, n }) => n >= 2 && near(heard[i].s) && heard[i].s > starts.at(-1) + 0.5 * len)
         .sort((a, b) => b.n - a.n || Math.abs(heard[a.i].s - t) - Math.abs(heard[b.i].s - t));
       if (hits.length) {
         const i = hits[0].i;
@@ -206,7 +208,7 @@ function cues(mp3, texts) {
         const last = tokens(texts[k - 1]).slice(-3);
         const ends = heard
           .map((w, i) => ({ i, n: last.filter((x, j) => heard[i + j] && same(heard[i + j].w, x)).length }))
-          .filter(({ i, n }) => n >= 2 && heard[i + 3] && Math.abs(heard[i + 2].e - t) <= 8 && heard[i + 2].e > starts.at(-1) + 0.5 * len)
+          .filter(({ i, n }) => n >= 2 && heard[i + 3] && near(heard[i + 2].e) && heard[i + 2].e > starts.at(-1) + 0.5 * len)
           .sort((a, b) => b.n - a.n || Math.abs(heard[a.i + 2].e - t) - Math.abs(heard[b.i + 2].e - t));
         if (ends.length) {
           const i = ends[0].i + 3; // first word of this block

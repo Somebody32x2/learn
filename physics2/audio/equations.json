@@ -1,0 +1,242 @@
+{
+ "chapter": "equations",
+ "blocks": [
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "Keep this page open during the semester"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Keep this page open during the semester. Every equation below is listed with what it relates, how the result scales when you change an input, its units, and the chapter that explains it. Read each equation as a sentence. \"The force between two charges grows with each charge, and falls with the square of the distance\" is more useful on an exam than the symbols alone.",
+   "src": "audio/266dad692297f120.mp3",
+   "start": 0,
+   "end": 25.86,
+   "dur": 25.9
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "ratio questions"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Most of these equations are products and quotients of powers, so most questions about them are ratio questions: multiply one input by some factor, and ask what happens to the output. The rest are exponentials, like R C circuits, R L circuits, and radioactive decay, where equal time steps multiply the decaying quantity by equal factors.",
+   "src": "audio/266dad692297f120.mp3",
+   "start": 25.86,
+   "end": 50.67,
+   "dur": 24.8
+  },
+  {
+   "section": 0,
+   "voice": "Charon",
+   "at": [
+    "The core eight",
+    "If you know these cold"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "First, the core eight. If you know these cold, with their words, most of the semester's problems have a starting point.",
+   "src": "audio/266dad692297f120.mp3",
+   "start": 50.67,
+   "end": 58.49,
+   "dur": 7.8
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "Force between two point charges"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Coulomb's law: F equals k, q one, q two, over r squared. The force between two point charges grows with each charge, and falls with the square of the distance. Like charges repel; unlike charges attract.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 0,
+   "end": 15.6,
+   "dur": 15.6
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "depends only on the charge"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Gauss's law: the net flux of field out of any closed surface depends only on the charge inside, divided by epsilon naught. With symmetry, it gives you the field in one line.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 15.6,
+   "end": 27.36,
+   "dur": 11.8
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "Closely spaced equipotentials mean"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Field and potential: E equals minus the slope of V. The field is the downhill slope of the potential, so closely spaced equipotentials mean a strong field, and E points toward lower V.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 27.36,
+   "end": 40.5,
+   "dur": 13.1
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "Voltage across a resistor is proportional"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Ohm and Kirchhoff: V equals I R, the currents in a junction equal the currents out, and the voltage changes around any loop add to zero. Charge is conserved at junctions, and energy around loops. Those three lines solve any D C circuit.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 40.5,
+   "end": 56.66,
+   "dur": 16.2
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "charges feel it, and the force is"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The magnetic force: F equals q, v cross B. Only moving charges feel it, and the force is perpendicular to both v and B, by the right-hand rule, flipped for negative charges. It changes a particle's direction, never its speed.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 56.66,
+   "end": 75.81,
+   "dur": 19.2
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "magnetic flux through a loop induces"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Faraday and Lenz: a changing magnetic flux through a loop induces an emf, proportional to how fast it changes, times the number of turns. And the minus sign means the induced current opposes the change.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 75.81,
+   "end": 89.85,
+   "dur": 14
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "All light travels at c in vacuum"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Waves: c equals f lambda. All light travels at c in vacuum, so frequency and wavelength are inversely proportional. And the value of c is set by the electric and magnetic constants.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 89.85,
+   "end": 103.5,
+   "dur": 13.7
+  },
+  {
+   "section": 1,
+   "voice": "Achird",
+   "at": [
+    "Light comes in photons whose energy"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "And photon energy: E equals h f, or h c over lambda. Light comes in photons whose energy is proportional to frequency. Blue photons carry more energy than red ones, regardless of brightness.",
+   "src": "audio/23a51fb77584da73.mp3",
+   "start": 103.5,
+   "end": 117.14,
+   "dur": 13.6
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [],
+   "sel": null,
+   "figure": "What happens to the output?",
+   "step": null,
+   "text": "Now drill the ratio habit with the scaling explorer. Pick an equation, then move the slider to multiply its input. For Coulomb's law, doubling r gives a quarter of the force, because r is squared in the denominator. Try the wire's field, the photon's energy, and decay, and predict each answer before you look.",
+   "src": "audio/092904da791d0a3c.mp3",
+   "start": 0,
+   "end": 19.26,
+   "dur": 19.3
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "Read the exponent, not the formula"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "The trick: read the exponent, not the formula. If the output goes as the input to the power n, multiplying the input by s multiplies the output by s to the n. Inverse square: double r, quarter the force. Inverse: double r, halve V or B. And if several inputs change at once, multiply their factors.",
+   "src": "audio/092904da791d0a3c.mp3",
+   "start": 19.26,
+   "end": 41.28,
+   "dur": 22
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "All equations by topic"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "Below that, you'll find every equation of the course, grouped by topic, each with what it relates, its units, and a link back to its chapter. Then a table of the constants.",
+   "src": "audio/092904da791d0a3c.mp3",
+   "start": 41.28,
+   "end": 51.42,
+   "dur": 10.1
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [
+    "Unit traps that cost points"
+   ],
+   "sel": null,
+   "figure": null,
+   "step": null,
+   "text": "And the unit traps that cost points. Mind the prefixes: micro is ten to the minus six, nano ten to the minus nine, pico ten to the minus twelve. Square centimeters convert with ten to the minus four, not minus two. And electron-volts are energy, while volts are energy per charge: an electron crossing five volts gains five electron-volts.",
+   "src": "audio/092904da791d0a3c.mp3",
+   "start": 51.42,
+   "end": 76.32,
+   "dur": 24.9
+  },
+  {
+   "section": 2,
+   "voice": "Charon",
+   "at": [],
+   "sel": ".quiz",
+   "figure": null,
+   "step": null,
+   "text": "Try the final checkpoint below. And that's the whole course: from charges and fields, through circuits and magnetism, to light, photons, atoms, and nuclei. Good luck this semester!",
+   "src": "audio/092904da791d0a3c.mp3",
+   "start": 76.32,
+   "end": 88.49,
+   "dur": 12.2
+  }
+ ]
+}
