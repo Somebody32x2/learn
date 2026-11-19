@@ -30,4 +30,12 @@ export const topics = [
     storage: 'heaps',
     art: '<svg viewBox="0 0 120 80"><path d="M60 12 36 34M60 12l24 22M36 34 24 52M36 34l12 18" /><circle cx="60" cy="12" r="8" fill="var(--blue-bg)" /><circle cx="36" cy="34" r="8" fill="var(--surface)" /><circle cx="84" cy="34" r="8" fill="var(--surface)" /><circle cx="24" cy="52" r="8" fill="var(--surface)" /><circle cx="48" cy="52" r="8" fill="var(--surface)" /><rect x="25" y="64" width="70" height="12" rx="2" fill="var(--surface)" /><path d="M39 64v12M53 64v12M67 64v12M81 64v12" /></svg>',
   },
+  {
+    href: 'dijkstra/',
+    title: 'Dijkstra\u2019s algorithm',
+    blurb: 'Shortest paths from one source with nonnegative weights: labels, relaxation, why the nearest vertex is final, and O((n + m) log n) with a heap.',
+    chapters: ['Dijkstra\u2019s algorithm'],
+    storage: 'dijkstra',
+    art: '<svg viewBox="0 0 120 80"><path d="M20 40 56 14M20 40l36 26M56 14l44 26M56 66l44-26M56 14v52" /><circle cx="20" cy="40" r="9" fill="var(--green-bg)" /><circle cx="56" cy="14" r="9" fill="var(--blue-bg)" /><circle cx="56" cy="66" r="9" fill="var(--surface)" /><circle cx="100" cy="40" r="9" fill="var(--surface)" /></svg>',
+  },
 ];

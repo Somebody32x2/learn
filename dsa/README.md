@@ -10,13 +10,14 @@ Part of [the lessons hub](../README.md): this folder is served at `<hub>/dsa/`.
 | Trees & AVL rotations | [`trees/`](trees/) | BSTs, height and balance, rotations, trinode restructure(x), AVL insertion and deletion, running times (O(1) rotations and restructures, O(log n) search, insert, delete), drills, playground |
 | The master theorem | [`master/`](master/) | Divide-and-conquer recurrences, recursion trees, the three cases, memorization drills, generated practice with guided walkthroughs, a step-by-step solver |
 | Heaps | [`heaps/`](heaps/) | Heap order, complete binary trees stored in arrays (0-based index arithmetic), insert with up-heap, removeMin with down-heap, O(log n) running times, a sandbox |
+| Dijkstra's algorithm | [`dijkstra/`](dijkstra/) | Single-source shortest paths with nonnegative weights: dist labels and relaxation, a step-through from any source, why a removed vertex is final, the negative-edge counterexample, O((n + m) log n) with a heap and with lazy deletion |
 
 ## Run locally
 
 No build step, no dependencies. ES modules need to be served over HTTP. From the repository root:
 
 ```sh
-npm start        # http://localhost:5173/dsa/ (compartments at /dsa/trees/, /dsa/master/, /dsa/heaps/)
+npm start        # http://localhost:5173/dsa/ (compartments at /dsa/trees/, /dsa/master/, /dsa/heaps/, /dsa/dijkstra/)
 npm test         # model tests for every subject (node:test, Node 22+)
 ```
 
@@ -53,6 +54,10 @@ heaps/              Heaps compartment
   src/model/heap.js min-heap (insert/up-heap, removeMin/down-heap) and tree + array frame builders
   src/lessons/      heaps.js (the chapter); index.js sets the order
   tests/            model tests
+dijkstra/           Dijkstra compartment
+  src/model/dijkstra.js  the run (one snapshot per step), Bellman-Ford reference, graph + queue frame builders
+  src/lessons/      dijkstra.js (the chapter); index.js sets the order
+  tests/            model tests (checked against Bellman-Ford on random graphs)
 ```
 
 Each compartment's `index.html` sets `<html data-site="...">`, which namespaces its saved quiz progress.
@@ -72,6 +77,10 @@ Each compartment's `index.html` sets `<html data-site="...">`, which namespaces 
   n^(log_b a) − ε, n^(log_b a) log^k n (k ≥ 0), and n^(log_b a) + ε with the regularity condition a f(n/b) ≤ c f(n).
 - Heaps follow Goodrich & Tamassia: a min-heap with the root at array index 0 (children 2i + 1 and 2i + 2,
   parent ⌊(i − 1)/2⌋), the last node at index n − 1, up-heap after insert and down-heap after removeMin.
+- Dijkstra follows Goodrich & Tamassia's version: every vertex starts in an adaptable priority queue, removeMin
+  adds a vertex to the cloud, its outgoing edges to vertices still in the queue are relaxed with replaceKey.
+  The book's label D[v] is written dist[v] (the vertices are named A to F). Ties in removeMin go to the
+  earlier name.
 
 ## License
 

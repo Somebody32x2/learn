@@ -6,7 +6,7 @@ exactly where an answer went wrong. This repo is the hub page plus one folder pe
 | Path | What it is |
 |---|---|
 | `/` | the hub: lists every subject (`subjects.js`), installable as one app (`manifest.webmanifest`, `sw.js`) |
-| [`dsa/`](dsa/) | Data Structures & Algorithms: AVL trees and rotations, the master theorem, heaps |
+| [`dsa/`](dsa/) | Data Structures & Algorithms: AVL trees and rotations, the master theorem, heaps, Dijkstra's algorithm |
 | [`physics2/`](physics2/) | Physics II: fields, circuits, magnetism, light and optics, early quantum physics, with narration |
 
 ## Run locally

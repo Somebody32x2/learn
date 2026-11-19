@@ -9,7 +9,7 @@ export const subjects = [
     course: 'CSE 2407 \u00b7 WashU',
     short: 'DSA', // button label
     blurb:
-      'Lessons built around figures you can step through: balanced trees and rotations, divide-and-conquer recurrences. Every idea ends in a checkpoint, and practice problems walk you through the step you got wrong.',
+      'Lessons built around figures you can step through: balanced trees and rotations, divide-and-conquer recurrences, heaps, shortest paths. Every idea ends in a checkpoint, and practice problems walk you through the step you got wrong.',
     repo: 'https://github.com/Somebody32x2/learn/tree/main/dsa',
     topics: [
       {
@@ -32,6 +32,13 @@ export const subjects = [
         meta: '1 chapter',
         blurb: 'Heap order, complete binary trees stored in an array, insert with up-heap, removeMin with down-heap.',
         storage: 'heaps',
+      },
+      {
+        title: 'Dijkstra\u2019s algorithm',
+        href: 'dsa/dijkstra/',
+        meta: '1 chapter',
+        blurb: 'Shortest paths from one source: dist labels, edge relaxation, why the nearest vertex is final, why negative edges break it.',
+        storage: 'dijkstra',
       },
     ],
     // Line-art mark for the card: a small tree beside shrinking level-cost bars.

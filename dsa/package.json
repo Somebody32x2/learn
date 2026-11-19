@@ -1,7 +1,7 @@
 {
   "name": "dsa",
   "version": "1.0.0",
-  "description": "Interactive, visual lessons on data structures and algorithms: AVL trees and rotations, the master theorem, heaps.",
+  "description": "Interactive, visual lessons on data structures and algorithms: AVL trees and rotations, the master theorem, heaps, Dijkstra's algorithm.",
   "type": "module",
   "private": true,
   "license": "MIT",
