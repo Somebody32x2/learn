@@ -14,6 +14,9 @@ import { progress } from './progress.js';
  * pick: the learner clicks items in a frame. ordered + labels (e.g. ['z','y','x']) names each click.
  * `after` (optional frame) is shown once they check, e.g. with the hidden numbers revealed.
  * `View` defaults to Scene; pass TreeView (trees kit) or any class with the same interface.
+ * The card keeps its progress: it opens at the first question not answered yet in the current attempt (saved
+ * on this device, keyed by the question ids) or, with no attempt saved, after the questions already in the
+ * progress; with every question answered it shows the summary.
  */
 export function checkpoint(questions, { title = 'Checkpoint' } = {}) {
   const card = h('section', { class: 'quiz reveal' });
@@ -22,8 +25,15 @@ export function checkpoint(questions, { title = 'Checkpoint' } = {}) {
   const foot = h('div', { class: 'quiz-foot' });
   card.append(head, body, foot);
 
-  let i = 0;
-  let results = [];
+  const key = questions.map((q) => q.id).join('|');
+  /** First question after `from` that this attempt hasn't answered (questions.length: all answered). */
+  const nextOpen = (from) => {
+    let k = from + 1;
+    while (k < questions.length && typeof results[k] === 'boolean') k++;
+    return k;
+  };
+  let results = (progress.attempt(key) ?? questions.map((q) => progress.data[q.id])).slice(0, questions.length);
+  let i = nextOpen(-1);
 
   const header = () => {
     head.replaceChildren(
@@ -52,14 +62,15 @@ export function checkpoint(questions, { title = 'Checkpoint' } = {}) {
     const q = { ...raw, prompt: typeof raw.prompt === 'function' ? raw.prompt() : raw.prompt, explain: typeof raw.explain === 'function' ? raw.explain() : raw.explain };
     const done = (correct) => {
       results[i] = correct;
+      progress.saveAttempt(key, results);
       progress.record(q.id, correct);
       header();
       foot.replaceChildren(
         h('button', {
           class: 'btn',
-          html: `${i + 1 < questions.length ? 'Next question' : 'See results'} ${icon.arrow}`,
+          html: `${nextOpen(i) < questions.length ? 'Next question' : 'See results'} ${icon.arrow}`,
           onclick: () => {
-            i++;
+            i = nextOpen(i);
             show();
           },
         }),
@@ -91,6 +102,7 @@ export function checkpoint(questions, { title = 'Checkpoint' } = {}) {
         onclick: () => {
           i = 0;
           results = [];
+          progress.saveAttempt(key, results);
           show();
         },
       }),
