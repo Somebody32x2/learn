@@ -42,18 +42,26 @@ function logo() {
 const quizIds = (ch) => (ch.quiz ?? []).map((q) => q.id);
 const num = (ch) => String(chapters.indexOf(ch) + 1).padStart(2, '0');
 
+/** Sidebar groups in chapter order: [{ name, items: [chapters] }]. */
+const groups = [];
+for (const ch of chapters) {
+  let g = groups.find((x) => x.name === ch.group);
+  if (!g) groups.push((g = { name: ch.group, items: [] }));
+  g.items.push(ch);
+}
+/** URL slug of a group name: 'Light & optics' -> 'light-optics'. Its table of contents is #/toc/<slug>. */
+const slug = (name) => name.toLowerCase().replace(/&/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const tocHref = (g) => `#/toc/${slug(g.name)}`;
+const groupOf = (name) => groups.find((g) => g.name && g.name === name);
+const course = site.eyebrow.split(' \u00b7 ')[0]; // 'PHYS 1742'
+
 function renderNav(current) {
-  const groups = [];
-  for (const ch of chapters) {
-    let g = groups.find((x) => x.name === ch.group);
-    if (!g) groups.push((g = { name: ch.group, items: [] }));
-    g.items.push(ch);
-  }
   nav.replaceChildren(
     h('a', { class: `nav-item${current === 'home' ? ' on' : ''}`, href: '#/' }, h('span', { class: 'nav-num' }), h('span', { text: 'Overview' })),
-    ...groups.map((g) =>
-      h('div', { class: 'nav-group' },
-        g.name && h('div', { class: 'nav-label', text: g.name }),
+    ...groups.map((g) => {
+      const on = g.name && current === `toc:${slug(g.name)}`;
+      return h('div', { class: 'nav-group' },
+        g.name && h('a', { class: `nav-label${on ? ' on' : ''}`, href: tocHref(g), title: `${g.name}: contents`, 'aria-current': on ? 'page' : null, text: g.name }),
         g.items.map((ch) => {
           const ids = quizIds(ch);
           const got = progress.correct(ids);
@@ -68,8 +76,8 @@ function renderNav(current) {
               }),
           );
         }),
-      ),
-    ),
+      );
+    }),
   );
 }
 
@@ -122,7 +130,7 @@ function renderChapter(ch) {
   document.title = `${ch.title} \u00b7 ${site.title}`;
   const article = h('article', { class: 'page' },
     h('header', { class: 'page-head' },
-      h('div', { class: 'eyebrow', text: `Chapter ${i + 1}${ch.group ? ` \u00b7 ${ch.group}` : ''}` }),
+      h('div', { class: 'eyebrow' }, `Chapter ${i + 1}`, groupOf(ch.group) && [' \u00b7 ', h('a', { href: tocHref(groupOf(ch.group)), text: ch.group })]),
       h('h1', { text: ch.title }),
       h('p', { class: 'lede', text: ch.blurb }),
     ),
@@ -140,6 +148,66 @@ function renderChapter(ch) {
   );
 }
 
+/** #/toc/<slug>: one group's chapters in order, with progress, and where to start or continue. */
+function renderToc(g) {
+  const items = g.items;
+  document.title = `${g.name} \u00b7 ${site.title}`;
+  const total = items.reduce((s, ch) => s + quizIds(ch).length, 0);
+  const solved = items.reduce((s, ch) => s + progress.correct(quizIds(ch)), 0);
+  // Start or continue at the first chapter whose checkpoint is not fully solved.
+  const next = items.find((ch) => progress.correct(quizIds(ch)) < quizIds(ch).length);
+  const target = next ?? items[0];
+  const action = !next ? 'Read again' : solved ? 'Continue' : 'Start';
+  const shown = groups.filter((x) => x.name);
+  const at = shown.indexOf(g);
+  const prevG = shown[at - 1];
+  const nextG = shown[at + 1];
+  const page = h('article', { class: 'page toc' },
+    h('header', { class: 'page-head' },
+      h('div', { class: 'eyebrow', text: `${course} \u00b7 Part ${at + 1} of ${shown.length}` }),
+      h('h1', { text: g.name }),
+      h('p', { class: 'toc-summary', text: [`${items.length} chapter${items.length === 1 ? '' : 's'}`, total ? `${solved} of ${total} checkpoint questions solved` : null].filter(Boolean).join(' \u00b7 ') }),
+      h('div', { class: 'hero-actions' },
+        h('a', { class: 'btn', href: `#/${target.id}`, html: `${action}: ${target.title} ${icon.arrow}` }),
+        h('a', { class: 'btn ghost', href: '#/', text: 'All chapters' }),
+      ),
+    ),
+    h('ol', { class: 'toc-list' },
+      items.map((ch, i) => {
+        const ids = quizIds(ch);
+        const got = progress.correct(ids);
+        return h('li', { class: 'reveal', style: `--i:${i % 6}` },
+          h('a', { class: `toc-item${ch === target ? ' is-next' : ''}`, href: `#/${ch.id}` },
+            h('span', { class: 'toc-num', text: num(ch) }),
+            h('span', { class: 'toc-text' },
+              h('span', { class: 'toc-title', text: ch.title }),
+              h('span', { class: 'toc-blurb', text: ch.blurb }),
+              ids.length > 0 && h('span', { class: 'card-prog toc-prog' }, h('span', { style: `width:${(100 * got) / ids.length}%` })),
+            ),
+            h('span', { class: 'toc-meta' },
+              solved > 0 && ch === next && h('span', { class: 'card-group', text: 'up next' }),
+              ids.length > 0 &&
+                h('span', {
+                  class: `nav-prog${got === ids.length ? ' full' : ''}`,
+                  title: `${got} of ${ids.length} checkpoint questions correct`,
+                  html: got === ids.length ? icon.check : `${got}/${ids.length}`,
+                }),
+            ),
+            h('span', { class: 'topic-go', html: icon.arrow }),
+          ),
+        );
+      }),
+    ),
+    h('nav', { class: 'pager' },
+      prevG ? h('a', { class: 'pager-link', href: tocHref(prevG) }, h('span', { class: 'eyebrow', text: 'Previous part' }), h('span', { text: prevG.name })) : h('span'),
+      nextG
+        ? h('a', { class: 'pager-link next', href: tocHref(nextG) }, h('span', { class: 'eyebrow', text: 'Next part' }), h('span', { text: nextG.name }))
+        : h('a', { class: 'pager-link next', href: '../' }, h('span', { class: 'eyebrow', text: 'Done' }), h('span', { text: 'All subjects' })),
+    ),
+  );
+  main.replaceChildren(page);
+}
+
 const observer = new IntersectionObserver(
   (entries) => {
     for (const e of entries) {
@@ -152,13 +220,20 @@ const observer = new IntersectionObserver(
   { rootMargin: '0px 0px -8% 0px' },
 );
 
-const currentId = () => chapters.find((c) => location.hash === `#/${c.id}`)?.id ?? 'home';
+/** The group whose table of contents the route shows (#/toc/<slug>), if any. */
+const tocGroup = () => {
+  const m = /^#\/toc\/([^/?]+)/.exec(location.hash);
+  return m ? groups.find((g) => g.name && slug(g.name) === m[1]) : null;
+};
+const currentId = () => chapters.find((c) => location.hash === `#/${c.id}`)?.id ?? (tocGroup() ? `toc:${slug(tocGroup().name)}` : 'home');
 
 function route() {
   const ch = chapters.find((c) => location.hash === `#/${c.id}`);
+  const g = tocGroup();
   document.body.classList.remove('nav-open');
   stopNarration();
   if (ch) renderChapter(ch);
+  else if (g) renderToc(g);
   else renderHome();
   renderNav(currentId());
   window.scrollTo(0, 0);

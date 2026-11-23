@@ -5,7 +5,9 @@
     <!-- Behind a prefix-stripping proxy, /learn and /learn/ reach the server as the same request;
          relative URLs only resolve with the slash, so add it before anything else loads. -->
     <script>if (!/\/$|\.[a-z]+$/i.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Resume where you left off; synchronous on purpose: the installed app may jump to the last lesson before this page paints. -->
+    <script src="resume.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0c0c0b" media="(prefers-color-scheme: dark)" />
@@ -36,6 +38,8 @@
           a checkpoint after every idea, and practice that shows exactly where an answer went wrong.
         </p>
       </section>
+
+      <div id="resume" class="resume" hidden></div>
 
       <section>
         <h2 class="reveal">Subjects</h2>

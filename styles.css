@@ -44,7 +44,7 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
 body {
   margin: 0;
   background: var(--bg);
@@ -67,6 +67,7 @@ body > * { position: relative; z-index: 1; }
 a { color: inherit; }
 ::selection { background: var(--accent-bg); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+a, button { touch-action: manipulation; }
 
 /* ---------- bar ---------- */
 .bar {
@@ -79,7 +80,6 @@ a { color: inherit; }
   gap: 16px;
 }
 .home { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); text-decoration: none; }
-.home:hover { color: var(--ink-strong); }
 .home svg, .btn svg, .topic-go svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: none; }
 .bar-meta { font: 500 12px var(--mono); color: var(--faint); }
 
@@ -93,7 +93,6 @@ h1 em { font-style: italic; color: var(--muted); }
 h2 { font-size: 30px; line-height: 1.15; margin: 88px 0 20px; }
 h3 { font-size: 30px; line-height: 1.12; margin: 8px 0 0; }
 h3 a { text-decoration: none; }
-h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .lede { font-size: 19px; line-height: 1.6; color: var(--muted); margin: 0; }
 
 /* ---------- subject card ---------- */
@@ -121,13 +120,11 @@ h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-un
   text-decoration: none;
   transition: background 0.2s;
 }
-.topic:hover { background: var(--sunk); }
 .topic-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .topic-title { font-weight: 500; color: var(--ink-strong); }
 .topic-blurb { font-size: 14.5px; color: var(--muted); }
 .topic-meta { font: 12px var(--mono); color: var(--faint); white-space: nowrap; }
 .topic-go { color: var(--faint); display: inline-flex; transition: transform 0.3s var(--ease), color 0.2s; }
-.topic:hover .topic-go, .tool:hover .topic-go { transform: translateX(3px); color: var(--ink-strong); }
 
 .subject-foot { display: flex; align-items: center; gap: 22px; margin-top: 24px; flex-wrap: wrap; }
 .btn {
@@ -141,12 +138,10 @@ h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-un
   font-size: 14.5px;
   font-weight: 500;
   text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.2s, transform 0.16s var(--ease);
 }
-.btn:hover { background: var(--btn-hover); }
-.btn:active { transform: scale(0.98); }
+.btn:active { transform: scale(0.97); }
 .quiet { font-size: 14px; color: var(--muted); text-decoration: none; }
-.quiet:hover { color: var(--ink-strong); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- tools ---------- */
 .tools { border-top: 1px solid var(--line); }
@@ -159,9 +154,38 @@ h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-un
   border-bottom: 1px solid var(--line);
   text-decoration: none;
 }
-.tool:hover { background: var(--sunk); }
 .tool-title { font-weight: 500; color: var(--ink-strong); }
 .tool-blurb { font-size: 14.5px; color: var(--muted); }
+
+/* ---------- continue where you left off (resume.js saves it, main.js shows it) ---------- */
+.resume { margin: 8px 0 -40px; max-width: 760px; }
+.resume-card {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.16s var(--ease);
+}
+.resume-card:active { transform: scale(0.985); }
+.resume-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.resume-title { font-family: var(--serif); font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topic:active, .tool:active { background: var(--sunk); }
+
+/* ---------- hover: only where a real pointer hovers (a tap must not leave a row lit) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .home:hover { color: var(--ink-strong); }
+  h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .topic:hover, .tool:hover { background: var(--sunk); }
+  .topic:hover .topic-go, .tool:hover .topic-go, .resume-card:hover .topic-go { transform: translateX(3px); color: var(--ink-strong); }
+  .resume-card:hover { border-color: var(--line-strong); }
+  .btn:hover { background: var(--btn-hover); }
+  .quiet:hover { color: var(--ink-strong); text-decoration: underline; text-underline-offset: 3px; }
+}
 
 /* ---------- footer ---------- */
 .foot {
@@ -176,17 +200,22 @@ h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-un
   color: var(--faint);
 }
 .noscript { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+/* Installed on a phone with a notch: keep content inside the safe area (viewport-fit=cover in index.html). */
+.bar, main, .foot, .noscript { padding-left: max(32px, env(safe-area-inset-left)); padding-right: max(32px, env(safe-area-inset-right)); }
+.bar { padding-top: max(22px, env(safe-area-inset-top)); }
+.foot { padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 20px)); }
 
 /* ---------- motion ---------- */
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+  .btn:active, .resume-card:active { transform: none; }
 }
 
 /* ---------- narrow ---------- */
 @media (max-width: 720px) {
-  .bar, main, .foot { padding-left: 20px; padding-right: 20px; }
+  .bar, main, .foot, .noscript { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
   .hero { padding-top: 48px; }
   h2 { margin-top: 64px; }
   .subject { padding: 24px 20px 22px; }
@@ -198,4 +227,9 @@ h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-un
   .tool { grid-template-columns: 1fr auto; }
   .tool-blurb { grid-column: 1; }
   .tool .topic-go { grid-row: 1 / span 2; grid-column: 2; }
+  .resume { margin-bottom: -24px; }
+  .resume-card { grid-template-columns: 1fr auto; padding: 14px 16px; gap: 4px 14px; }
+  .resume-card .topic-meta { grid-column: 1; grid-row: 2; white-space: normal; }
+  .resume-card .topic-go { grid-row: 1 / span 2; grid-column: 2; }
+  .resume-title { font-size: 20px; }
 }

@@ -7,7 +7,7 @@
  * truth) with the cache as the offline fallback. Google Fonts are stale-while-revalidate.
  * Bump VERSION when the shell list changes; old caches are dropped on activate.
  */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = `learn-${VERSION}`;
 const FONTS = 'learn-fonts';
 // Caches this worker may delete: its own old versions. Other apps on the same origin keep theirs.
@@ -17,6 +17,7 @@ const SHELL = [
   'styles.css',
   'main.js',
   'subjects.js',
+  'resume.js',
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-192.png',

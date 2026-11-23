@@ -33,7 +33,7 @@ npm test      # model tests (Node 22+)
 
 ```
 index.html, styles.css      shell and every style (physics colors: "physics figures" section)
-src/main.js                 sidebar, hash router (#/chapter-id), home page, pager
+src/main.js                 sidebar, hash router (#/chapter-id, #/toc/<group slug> contents), home page, pager
 src/site.js                 title, hero text
 src/lessons/index.js        chapter order, home hero figure, color legend
 src/lessons/<id>.js         one chapter per file: prose, equation cards, figures, checkpoint
@@ -58,6 +58,13 @@ Chapters with a script in `tts/script/<chapter id>.js` get a **Listen** button: 
 3.8 Flash TTS, voices Achird and Charon, alternating by section) that highlights each paragraph and steps the
 figures as it goes. The scripts are written to be heard: math is spoken ("E equals sigma over epsilon naught"),
 and scripts carry no inline Gemini tags (it sometimes speaks them aloud); each block points at its page text with `at`.
+
+While it plays: narration stops after the block that points at a checkpoint (`sel: '.quiz'`) and waits; the bar
+and the quiz show **Continue** (solid once every question is answered), nothing resumes by itself. A small play
+button in the left margin of each narrated paragraph, figure or quiz starts from there (shown on hover or focus; on
+touch screens, faintly, while the bar is open). The block reached is kept per chapter in localStorage
+`physics2.tts.pos` (this device only), so Listen offers **Resume** with the minutes left. The page dispatches
+`narration` `{ playing, gated }` on `window` and pauses on `learn:pause-narration`.
 
 ```sh
 node tts/gen.mjs --dry        # what is missing, no calls

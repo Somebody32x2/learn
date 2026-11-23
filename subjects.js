@@ -60,11 +60,12 @@ export const subjects = [
         blurb: 'How charges, fields, circuits, magnetism, light and the quantum fit into one story.',
         storage: 'physics2', // the whole site shares one progress namespace, so the solved count lives on this row
       },
-      { title: 'Electric fields', href: 'physics2/#/charge', meta: '4 chapters', blurb: "Coulomb's law, field lines, Gauss's law, potential and voltage." },
-      { title: 'Circuits', href: 'physics2/#/capacitance', meta: '4 chapters', blurb: 'Capacitors, current and resistance, Kirchhoff, RC charging.' },
-      { title: 'Magnetism', href: 'physics2/#/magnetic-force', meta: '4 chapters', blurb: 'F = qv \u00d7 B, fields of currents, Faraday and Lenz, LC oscillations.' },
-      { title: 'Light & optics', href: 'physics2/#/em-waves', meta: '4 chapters', blurb: 'EM waves, Snell and lenses, interference, diffraction.' },
-      { title: 'Quantum & nuclear', href: 'physics2/#/photons', meta: '3 chapters', blurb: 'Photons, Bohr atoms and matter waves, binding energy and decay.' },
+      // Each section row opens that section's table of contents (#/toc/<slug>, slug of the group name).
+      { title: 'Electric fields', href: 'physics2/#/toc/electric-fields', meta: '4 chapters', blurb: "Coulomb's law, field lines, Gauss's law, potential and voltage." },
+      { title: 'Circuits', href: 'physics2/#/toc/circuits', meta: '4 chapters', blurb: 'Capacitors, current and resistance, Kirchhoff, RC charging.' },
+      { title: 'Magnetism', href: 'physics2/#/toc/magnetism', meta: '4 chapters', blurb: 'F = qv \u00d7 B, fields of currents, Faraday and Lenz, LC oscillations.' },
+      { title: 'Light & optics', href: 'physics2/#/toc/light-optics', meta: '4 chapters', blurb: 'EM waves, Snell and lenses, interference, diffraction.' },
+      { title: 'Quantum & nuclear', href: 'physics2/#/toc/quantum-nuclear', meta: '3 chapters', blurb: 'Photons, Bohr atoms and matter waves, binding energy and decay.' },
     ],
     // Line-art mark: a charge with field lines, and a light wave.
     art: '<svg viewBox="0 0 160 72" aria-hidden="true"><path d="M30 36H6M30 36h24M30 36 13 19M30 36l17-17M30 36 13 53M30 36l17 17M30 36V8M30 36v28" style="fill:none" /><circle cx="30" cy="36" r="9" class="dot" /><path d="M26 36h8M30 32v8" style="fill:none" /><path d="M72 36c6-24 12-24 18 0s12 24 18 0 12-24 18 0 12 24 18 0" style="fill:none" /><path d="M146 30l8 6-8 6" style="fill:none" /></svg>',

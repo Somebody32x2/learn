@@ -100,7 +100,6 @@ button { font: inherit; color: inherit; }
   color: var(--ink);
   transition: background 0.15s;
 }
-.nav-item:hover { background: var(--sunk); }
 .nav-item.on { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink-strong); font-weight: 500; }
 .nav-num { font-family: var(--mono); font-size: 11px; color: var(--faint); width: 18px; }
 .nav-title { flex: 1; }
@@ -109,11 +108,9 @@ button { font: inherit; color: inherit; }
 .nav-prog svg { width: 14px; height: 14px; display: block; fill: none; stroke: currentColor; stroke-width: 2; }
 .side-foot { display: flex; flex-direction: column; gap: 4px; padding: 18px 10px 0; border-top: 1px solid var(--line); margin-top: 18px; }
 .link { background: none; border: 0; padding: 0; text-align: left; font-size: 13px; color: var(--muted); cursor: pointer; text-decoration: none; }
-.link:hover { color: var(--ink); text-decoration: underline; }
 
 /* "All topics" link back to the umbrella homepage (same rules as the root styles.css) */
 .up-link { display: inline-flex; align-items: center; gap: 6px; margin: 0 8px 18px; font-size: 12.5px; color: var(--muted); text-decoration: none; }
-.up-link:hover { color: var(--ink); }
 .up-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; transform: rotate(180deg); }
 .topbar .up-link { margin: 0 0 0 auto; }
 
@@ -205,14 +202,11 @@ ol.steps li::before {
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
+  transition: background 0.15s, transform 0.16s var(--ease);
 }
-.btn:hover { background: #333; }
-.btn:active { transform: scale(0.98); }
 .btn:disabled { opacity: 0.35; cursor: default; }
 .btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 .btn.ghost { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
-.btn.ghost:hover { background: var(--sunk); }
 .btn.small { padding: 6px 12px; font-size: 13.5px; }
 
 .icon-btn {
@@ -225,9 +219,8 @@ ol.steps li::before {
   background: var(--surface);
   cursor: pointer;
   flex: none;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.16s var(--ease);
 }
-.icon-btn:hover:not(:disabled) { background: var(--sunk); }
 .icon-btn:disabled { opacity: 0.35; cursor: default; }
 .icon-btn svg { width: 15px; height: 15px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .icon-btn svg .fill { fill: var(--ink); stroke: none; }
@@ -243,7 +236,6 @@ ol.steps li::before {
   cursor: pointer;
   white-space: nowrap;
 }
-.seg button:hover { color: var(--ink); }
 .seg button.on { background: var(--surface); color: var(--ink-strong); box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(0, 0, 0, 0.03); font-weight: 500; }
 
 .chip {
@@ -442,7 +434,6 @@ tr:last-child td { border-bottom: 0; }
   font-size: 15px;
   transition: border-color 0.15s, background 0.15s;
 }
-.choice:hover:not(:disabled) { border-color: var(--line-strong); background: var(--sunk); }
 .choice:disabled { cursor: default; }
 .choice .letter { font: 500 12px var(--mono); color: var(--muted); }
 .choice.right { border-color: var(--green); background: var(--green-bg); }
@@ -514,7 +505,6 @@ tr:last-child td { border-bottom: 0; }
 }
 .chapter-card:nth-child(5) { grid-column: span 4; }
 .chapter-card:nth-child(8), .chapter-card:nth-child(9) { grid-column: span 3; }
-.chapter-card:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border-color: var(--line-strong); }
 .chapter-card p { font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.5; flex: 1; }
 .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
 .card-num { font: 500 12px var(--mono); color: var(--faint); }
@@ -531,7 +521,6 @@ tr:last-child td { border-bottom: 0; }
 
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 80px; }
 .pager-link { display: flex; flex-direction: column; gap: 2px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); text-decoration: none; font-family: var(--serif); font-size: 20px; letter-spacing: -0.02em; color: var(--ink-strong); transition: border-color 0.2s; }
-.pager-link:hover { border-color: var(--line-strong); }
 .pager-link.next { text-align: right; }
 
 /* ---------- motion ---------- */
@@ -540,4 +529,40 @@ tr:last-child td { border-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .edge-new { animation: none; }
+}
+
+/* ---------- touch and pointer polish (same rules as ../styles.css) ---------- */
+html { -webkit-tap-highlight-color: transparent; }
+a, button, label, summary { touch-action: manipulation; }
+.main { min-height: 100dvh; }
+/* press feedback: quick, and only where it cannot fight the .reveal transition */
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.icon-btn:active:not(:disabled) { transform: scale(0.94); }
+.nav-item:active, .choice:active:not(:disabled) { background: var(--sunk); }
+.chapter-card:active, .pager-link:active { border-color: var(--line-strong); background: var(--sunk); }
+@media (prefers-reduced-motion: reduce) {
+  .btn:active:not(:disabled), .icon-btn:active:not(:disabled) { transform: none; }
+}
+/* hover only where a real pointer hovers: a tap must not leave things lit */
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:hover { background: var(--sunk); }
+  .link:hover { color: var(--ink); text-decoration: underline; }
+  .up-link:hover { color: var(--ink); }
+  .btn:hover { background: #333; }
+  .btn.ghost:hover { background: var(--sunk); }
+  .icon-btn:hover:not(:disabled) { background: var(--sunk); }
+  .seg button:hover { color: var(--ink); }
+  .choice:hover:not(:disabled) { border-color: var(--line-strong); background: var(--sunk); }
+  .chapter-card:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border-color: var(--line-strong); }
+  .pager-link:hover { border-color: var(--line-strong); }
+}
+/* iOS zooms into inputs under 16px */
+@media (pointer: coarse) {
+  .select, .key-input { font-size: 16px; }
+}
+/* notches and home indicators (viewport-fit=cover in index.html) */
+.sidebar { padding-left: max(18px, env(safe-area-inset-left)); padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+@media (max-width: 900px) {
+  .topbar { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+  .page { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 }

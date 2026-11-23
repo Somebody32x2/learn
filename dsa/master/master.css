@@ -202,3 +202,10 @@ pre.code.rec-code { margin: 0; padding: 14px 0; font-size: 12.5px; }
 .rec-parts sup, .rec-later sup, .ww-readout sup { line-height: 0; }
 .compare-grid.three .compare-label { flex-direction: column; gap: 2px; }
 .compare-grid.three .compare-label sup { line-height: 0; }
+
+/* iOS zooms into inputs under 16px: the compact practice inputs grow on touch screens */
+@media (pointer: coarse) {
+  .wt-field .text-input, .solver-form .key-input, .solver-form sup .key-input, .key-input.short, .recall-block .recall-input { font-size: 16px; }
+  .cloze-blank.key-input { height: 30px; font-size: 16px; }
+  .cloze-text sup .cloze-blank.key-input { height: 26px; font-size: 16px; }
+}

@@ -29,10 +29,15 @@ The service worker's scope is the hub's folder, so it covers every subject: inst
 them all, and any page you have opened works offline afterwards. It is network-first; the cache is only
 the offline fallback.
 
+`resume.js` (a classic script every page includes early in `<head>`: `resume.js` on the hub, `../resume.js` or
+`../../resume.js` below it) remembers the last lesson page and its scroll position in `localStorage`
+(`learn.resume.v1`, device-local). The hub shows a "Continue where you left off" card for it, and the installed
+app reopens there on launch. Section rows on the hub open each subject's table of contents (`#/toc/<slug>`).
+
 ## Adding a subject
 
 1. Create `<slug>/` with its own `index.html` (copy the head of `physics2/index.html`: the trailing-slash
-   script, the hub's `../manifest.webmanifest`, and the `../sw.js` registration with scope `../`).
+   script, `../resume.js`, the hub's `../manifest.webmanifest`, and the `../sw.js` registration with scope `../`).
 2. Give it a `package.json` with `"type": "module"` and its tests under `<slug>/tests/`, then add those
    tests to the root `package.json` `test` script.
 3. Add an entry to `subjects.js`; the hub lists it. Use relative links (`<slug>/`), and point `repo` at
