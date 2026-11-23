@@ -63,8 +63,10 @@ While it plays: narration stops after the block that points at a checkpoint (`se
 and the quiz show **Continue** (solid once every question is answered), nothing resumes by itself. A small play
 button in the left margin of each narrated paragraph, figure or quiz starts from there (shown on hover or focus; on
 touch screens, faintly, while the bar is open). The block reached is kept per chapter in localStorage
-`physics2.tts.pos` (this device only), so Listen offers **Resume** with the minutes left. The page dispatches
-`narration` `{ playing, gated }` on `window` and pauses on `learn:pause-narration`.
+`physics2.tts.pos` (this device only), so Listen offers **Resume** with the minutes left. Previous / next (bar,
+media keys, lock screen, headphones) move 3 paragraphs, a stepped figure counting as one; pressed again at the
+first or last paragraph they switch chapter and keep playing; at a checkpoint next skips it and play continues.
+The page dispatches `narration` `{ playing, gated }` on `window` and pauses on `learn:pause-narration`.
 
 ```sh
 node tts/gen.mjs --dry        # what is missing, no calls

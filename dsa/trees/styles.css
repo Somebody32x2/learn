@@ -450,6 +450,19 @@ tr:last-child td { border-bottom: 0; }
 .quiz-summary { text-align: center; padding: 10px 0 8px; }
 .quiz-summary .score { font: 400 48px var(--serif); color: var(--ink-strong); letter-spacing: -0.03em; }
 .quiz-summary p { color: var(--muted); max-width: 460px; margin: 4px auto 0; }
+/* Feedback and the final score come in by themselves (@starting-style, no JS). Feedback is short and led by
+   opacity, so the verdict reads at once. */
+.quiz .feedback { transition: opacity 0.16s var(--ease), transform 0.16s var(--ease); }
+.quiz-summary .score { transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+.quiz-summary p { transition: opacity 0.3s var(--ease) 0.06s; }
+@starting-style {
+  .quiz .feedback { opacity: 0; transform: translateY(-4px); }
+  .quiz-summary .score { opacity: 0; transform: scale(0.94); }
+  .quiz-summary p { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz .feedback, .quiz-summary .score { transition-property: opacity; }
+}
 
 /* ---------- lab ---------- */
 .lab-tools, .lab-form, .drill-tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }

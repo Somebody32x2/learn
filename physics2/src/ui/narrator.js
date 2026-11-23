@@ -1,4 +1,5 @@
 import { h, icon } from './dom.js';
+import { site } from '../site.js';
 
 /**
  * "Listen" for a chapter: plays the pre-recorded narration in audio/<chapter id>.json (made by tts/gen.mjs),
@@ -13,6 +14,10 @@ import { h, icon } from './dom.js';
  * quiz show Continue) instead of reading on. The block reached is remembered per chapter in localStorage
  * `physics2.tts.pos` ({ chapter id: block index }), so Listen offers to resume there.
  *
+ * Previous / next (bar, media keys, lock screen, headphones) move JUMP paragraphs; a stepped figure counts as one.
+ * Pressed again at the first / last paragraph they switch to the previous / next chapter (the page's pager
+ * links) and keep playing from its start; a chapter without narration ends it.
+ *
  * Events on window: dispatches 'narration' { playing, gated } on every start, pause and stop; listens for
  * 'learn:pause-narration' (sent by anything on the page that starts talking) and pauses, keeping the position.
  *
@@ -23,6 +28,8 @@ const RATES = [1, 1.25, 1.5, 0.85];
 const RATE_KEY = 'physics2.tts.rate';
 const POS_KEY = 'physics2.tts.pos';
 const BLOCKS = 'p, ul, ol, h2, h3, aside.callout, figure.fig, .eqcard, .table-wrap, .defs-card, .quiz';
+const JUMP = 3; // paragraphs per previous / next
+const REPEAT_MS = 250; // a second media action of the same kind this soon is a duplicate
 // A few samples of silence: playing it inside the click unlocks the audio element on iOS for the clips that follow.
 const SILENCE = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAACAgICA';
 const ico = {
@@ -30,28 +37,34 @@ const ico = {
   close: '<svg viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8" /></svg>',
 };
 
-let state = null; // { ch, article, blocks, i, playing, gated, bar, ... } while a chapter is mounted
+let state = null; // { ch, article, blocks, i, playing, gated, open, armed, ... } while a chapter is mounted
 const audio = typeof Audio === 'function' ? new Audio() : null;
 const urls = new Map(); // src -> Promise<object URL>
 let rate = Number(localStorage.getItem(RATE_KEY)) || 1;
+let bar = null; // the bar's elements: built once and kept across chapters, so a chapter switch does not flash it
+let unlocked = false; // the audio element has played inside a click: later plays need no gesture
+let carry = null; // { id, timer }: previous / next crossed into this chapter; it starts playing when mounted
+const session = 'mediaSession' in navigator ? navigator.mediaSession : null;
 
 addEventListener('learn:pause-narration', () => state?.playing && toggle());
 
 export async function mountNarration(ch, article) {
-  let data;
+  let data = null;
   try {
     const res = await fetch(`audio/${ch.id}.json`);
-    if (!res.ok) return;
-    data = await res.json();
+    if (res.ok) data = await res.json();
   } catch {
+    /* offline and never fetched: no narration */
+  }
+  const blocks = article.isConnected ? (data?.blocks ?? []) : [];
+  if (!blocks.length) {
+    if (claim(ch.id)) endBar();
     return;
   }
-  if (!article.isConnected || !data.blocks?.length) return;
-  const blocks = data.blocks;
-  const btn = h('button', { class: 'btn ghost small listen-btn', onclick: () => (state?.bar ? toggle() : start(savedPos(state))) });
+  const btn = h('button', { class: 'btn ghost small listen-btn', onclick: () => (state?.open ? toggle() : start(savedPos(state))) });
   const restart = h('button', { class: 'listen-restart', text: 'From the start', hidden: true, onclick: () => start(0) });
   article.querySelector('.page-head')?.append(btn, restart);
-  const s = { ch, article, blocks, i: 0, playing: false, gated: null, bar: null, btn, restart, speech: null, from: new Map() };
+  const s = { ch, article, blocks, i: 0, playing: false, gated: null, open: false, armed: false, btn, restart, speech: null, from: new Map() };
   state = s;
   labelListen(s);
   index(s);
@@ -60,6 +73,10 @@ export async function mountNarration(ch, article) {
   s.ro = new ResizeObserver(s.onResize);
   s.ro.observe(article);
   addEventListener('resize', s.onResize);
+  if (claim(ch.id)) {
+    openBar(s);
+    play(0);
+  }
 }
 
 export function stopNarration() {
@@ -67,8 +84,8 @@ export function stopNarration() {
   if (!s) return;
   ungate(s);
   halt();
-  if (s.bar) dismiss(s);
   clearHighlight();
+  s.article.classList.remove('tts-open');
   s.ro.disconnect();
   removeEventListener('resize', s.onResize);
   cancelAnimationFrame(s.layoutRaf);
@@ -78,15 +95,22 @@ export function stopNarration() {
   audio.removeAttribute('src');
   loaded = null;
   state = null;
-  if ('mediaSession' in navigator) navigator.mediaSession.metadata = null;
+  if (!s.open) return;
+  if (carry) {
+    // Previous / next crossed into another chapter: the bar stays while it loads, and its mount takes over.
+    bar.label.textContent = '\u2026';
+    carry.timer = setTimeout(() => claim(carry?.id) && endBar(), 8000);
+  } else endBar();
 }
 
 function start(i) {
-  if (!state.bar) openBar();
+  const s = state;
+  if (!s.open) openBar(s);
   // Unlock playback inside the user's click; the real clip replaces this once it has loaded.
   audio.src = SILENCE;
   loaded = null;
   audio.play().catch(() => {});
+  unlocked = true;
   play(i);
 }
 
@@ -121,78 +145,99 @@ function savedPos(s) {
 
 /** The Listen button: "Resume, n min left" when a closed narration stopped partway. */
 function labelListen(s) {
-  const at = s.bar ? 0 : savedPos(s);
+  const at = s.open ? 0 : savedPos(s);
   s.btn.innerHTML = `${ico.speaker}<span>${at ? 'Resume' : 'Listen'}</span><span class="listen-min">${minutes(s.blocks.slice(at))} min${at ? ' left' : ''}</span>`;
   s.btn.title = at ? `Resume at paragraph ${at + 1} of ${s.blocks.length}` : 'Read this chapter aloud (AI voices)';
   s.restart.hidden = !at;
 }
 
 // ---------- the bar ----------
-function openBar() {
-  const s = state;
-  s.article.classList.add('tts-open');
-  if (s.dock) {
-    clearTimeout(s.parked);
-    if (!s.dock.isConnected) {
-      document.body.append(s.dock);
-      void s.dock.offsetWidth; // start the entrance from the parked state
-    }
-  } else {
-    const btn = (name, label, fn, html = icon[name]) => h('button', { class: 'icon-btn', 'aria-label': label, title: label, html, onclick: fn });
-    s.bPlay = h('button', { class: 'btn small tts-play', 'aria-label': 'Pause', html: icon.pause, onclick: toggle });
-    s.label = h('span', { class: 'tts-label' });
-    s.live = h('span', { class: 'tts-sr', 'aria-live': 'polite' });
-    s.bRate = h('button', { class: 'tts-rate', title: 'Speed', 'aria-label': 'Speed', text: `${rate}×`, onclick: cycleRate });
-    s.dock = h('div', { class: 'tts-bar out', role: 'region', 'aria-label': 'Narration' },
-      btn('prev', 'Previous paragraph', () => play(s.i - 1)),
-      s.bPlay,
-      btn('next', 'Next paragraph', () => play(s.i + 1)),
-      s.label,
-      s.live,
-      s.bRate,
-      btn('close', 'Stop listening', closeBar, ico.close),
-    );
-    document.body.append(s.dock);
-    void s.dock.offsetWidth;
-  }
-  s.dock.classList.remove('out');
-  s.dock.inert = false;
-  s.bar = s.dock;
-  labelListen(s);
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.metadata = new MediaMetadata({ title: s.ch.title, artist: document.title.split(' · ').at(-1) });
-    const ms = navigator.mediaSession;
-    ms.setActionHandler('play', () => !state?.playing && toggle());
-    ms.setActionHandler('pause', () => state?.playing && toggle());
-    ms.setActionHandler('previoustrack', () => state && play(state.i - 1));
-    ms.setActionHandler('nexttrack', () => state && play(state.i + 1));
-  }
+function buildBar() {
+  const btn = (label, fn, html) => h('button', { class: 'icon-btn', 'aria-label': label, title: label, html, onclick: fn });
+  const b = {
+    prev: btn('Back', () => skip(-1), icon.prev),
+    play: h('button', { class: 'btn small tts-play', 'aria-label': 'Pause', html: icon.pause, onclick: () => state?.open && toggle() }),
+    next: btn('Forward', () => skip(1), icon.next),
+    label: h('span', { class: 'tts-label' }),
+    live: h('span', { class: 'tts-sr', 'aria-live': 'polite' }),
+    rate: h('button', { class: 'tts-rate', title: 'Speed', 'aria-label': 'Speed', text: `${rate}×`, onclick: cycleRate }),
+    timer: 0,
+  };
+  b.el = h('div', { class: 'tts-bar out', role: 'region', 'aria-label': 'Narration' }, b.prev, b.play, b.next, b.label, b.live, b.rate, btn('Stop listening', closeBar, ico.close));
+  return b;
 }
 
-/** Slide the bar out; it stays reusable until it has gone, so reopening mid-exit just turns it around. */
-function dismiss(s) {
-  s.article.classList.remove('tts-open');
-  s.dock.classList.add('out');
-  s.dock.inert = true;
-  const dock = s.dock;
-  s.parked = setTimeout(() => dock.remove(), 240);
-  s.bar = null;
+/** Slide the bar in; if it is still on its way out, turn it around. */
+function showBar() {
+  bar ??= buildBar();
+  clearTimeout(bar.timer);
+  if (!bar.el.isConnected) {
+    document.body.append(bar.el);
+    void bar.el.offsetWidth; // start the entrance from the parked state
+  }
+  bar.el.classList.remove('out');
+  bar.el.inert = false;
+}
+
+function hideBar() {
+  if (!bar?.el.isConnected) return;
+  bar.el.classList.add('out');
+  bar.el.inert = true;
+  clearTimeout(bar.timer);
+  bar.timer = setTimeout(() => bar.el.remove(), 240);
+}
+
+/** Narration is over (closed, or a chapter switch found nothing to play): bar away, media session idle. */
+function endBar() {
+  hideBar();
+  if (!session) return;
+  session.playbackState = 'none';
+  session.metadata = null;
+}
+
+/** Take over a pending chapter switch aimed at chapter id. */
+function claim(id) {
+  if (!carry || carry.id !== id) return false;
+  clearTimeout(carry.timer);
+  carry = null;
+  return true;
+}
+
+function openBar(s) {
+  s.open = true;
+  s.article.classList.add('tts-open');
+  showBar();
+  bar.rate.textContent = `${rate}×`;
+  labelListen(s);
+  if (session) {
+    const artwork = [{ src: new URL('../icons/icon-512.png', document.baseURI).href, sizes: '512x512', type: 'image/png' }];
+    session.metadata = new MediaMetadata({ title: s.ch.title, artist: site.title, artwork });
+    session.playbackState = 'paused';
+  }
 }
 
 function closeBar() {
   const s = state;
+  if (!s) {
+    if (carry && claim(carry.id)) endBar(); // closed while a chapter switch was loading
+    return;
+  }
+  if (!s.open) return;
   ungate(s);
   halt();
   clearHighlight();
-  dismiss(s);
+  s.open = false;
+  s.article.classList.remove('tts-open');
+  endBar();
   labelListen(s);
 }
 
 /** Stop whatever is sounding, keep the position. */
 function halt() {
   audio.onended = audio.ontimeupdate = null;
-  audio.pause();
   const s = state;
+  if (s) s.armed = false; // before pausing: this pause is ours
+  audio.pause();
   if (!s) return;
   clearTimeout(s.gateTimer);
   cancelAnimationFrame(s.gateRaf);
@@ -203,26 +248,30 @@ function halt() {
 }
 
 function setPlaying(on) {
-  state.playing = on;
-  paintPlay(state);
-  dispatchEvent(new CustomEvent('narration', { detail: { playing: on, gated: Boolean(state.gated) } }));
+  const s = state;
+  s.playing = on;
+  paintPlay(s);
+  if (session && s.open) session.playbackState = on ? 'playing' : 'paused';
+  dispatchEvent(new CustomEvent('narration', { detail: { playing: on, gated: Boolean(s.gated) } }));
 }
 
 function paintPlay(s) {
-  if (!s.bPlay) return;
+  if (!s.open) return;
   const gated = Boolean(s.gated) && !s.playing;
-  s.dock.classList.toggle('gated', gated);
-  s.bPlay.classList.toggle('wide', gated);
+  bar.el.classList.toggle('gated', gated);
+  bar.play.classList.toggle('wide', gated);
   if (gated) {
     const last = s.i + 1 >= s.blocks.length;
-    s.bPlay.innerHTML = `<span>${last ? 'Finish' : 'Continue'}</span>${icon.arrow}`;
-    s.bPlay.setAttribute('aria-label', last ? 'Finish listening' : 'Continue listening');
+    bar.play.innerHTML = `<span>${last ? 'Finish' : 'Continue'}</span>${icon.arrow}`;
+    bar.play.setAttribute('aria-label', last ? 'Finish listening' : 'Continue listening');
   } else {
-    s.bPlay.innerHTML = s.playing ? icon.pause : icon.play;
-    s.bPlay.setAttribute('aria-label', s.playing ? 'Pause' : 'Play');
+    bar.play.innerHTML = s.playing ? icon.pause : icon.play;
+    bar.play.setAttribute('aria-label', s.playing ? 'Pause' : 'Play');
   }
+  paintSkip(s);
 }
 
+/** Play / pause; at a checkpoint, Continue. A pause keeps the place: play goes on mid-clip. */
 function toggle() {
   const s = state;
   if (s.gated) resume();
@@ -230,10 +279,10 @@ function toggle() {
     if (s.speech) speechSynthesis.pause();
     else audio.pause();
     setPlaying(false);
-  } else if (s.speech) {
+  } else if (s.speech && (speechSynthesis.paused || speechSynthesis.speaking)) {
     speechSynthesis.resume();
     setPlaying(true);
-  } else if (audio.src && !audio.src.startsWith('data:') && audio.currentTime > 0 && !audio.ended) {
+  } else if (s.armed && !audio.ended) {
     audio.play().catch(() => {});
     setPlaying(true);
   } else play(s.i);
@@ -242,9 +291,129 @@ function toggle() {
 function cycleRate() {
   rate = RATES[(RATES.indexOf(rate) + 1) % RATES.length];
   localStorage.setItem(RATE_KEY, String(rate));
-  state.bRate.textContent = `${rate}×`;
+  bar.rate.textContent = `${rate}×`;
   audio.playbackRate = rate;
 }
+
+// ---------- previous / next ----------
+/** Block indexes where a paragraph starts for previous / next: the steps of one figure are one paragraph. */
+const units = (s) => (s.units ??= s.blocks.flatMap((b, i) => (i > 0 && b.figure && b.figure === s.blocks[i - 1].figure ? [] : [i])));
+const unitOf = (starts, i) => starts.findLastIndex((k) => k <= i);
+const atEnd = (s) => (s.gated ? s.i + 1 >= s.blocks.length : unitOf(units(s), s.i) === units(s).length - 1);
+
+/** The chapter before / after in reading order, from the page's pager (hidden chapters have none). */
+function neighbour(s, dir) {
+  const a = s.article.querySelector(dir < 0 ? '.pager a.pager-link:not(.next)' : '.pager a.pager-link.next');
+  const id = a?.getAttribute('href').match(/^#\/([\w-]+)$/)?.[1];
+  return id && id !== 'review' ? { id, href: `#/${id}`, title: a.lastElementChild?.textContent ?? '' } : null;
+}
+
+/**
+ * Back / forward JUMP paragraphs; at a checkpoint, forward skips it. A press that would run past the start or
+ * the end stops there; pressed again at the first / last paragraph it switches chapter and keeps playing.
+ */
+function skip(dir) {
+  const s = state;
+  if (!s?.open) return;
+  const starts = units(s);
+  const u = unitOf(starts, s.i);
+  if (dir < 0) {
+    if (s.i === 0) switchChapter(s, -1);
+    else play(starts[Math.max(0, u - JUMP)]);
+  } else if (atEnd(s)) switchChapter(s, 1);
+  else if (s.gated) play(s.i + 1);
+  else play(starts[Math.min(starts.length - 1, u + JUMP)]);
+}
+
+function switchChapter(s, dir) {
+  const to = neighbour(s, dir);
+  if (!to) return;
+  clearTimeout(carry?.timer);
+  carry = { id: to.id, timer: 0 };
+  location.hash = to.href; // the router stops this chapter and mounts that one, which claims the carry
+}
+
+/** Keep the previous / next buttons honest about what they will do next. */
+function paintSkip(s) {
+  const set = (b, label, none) => {
+    b.disabled = !label;
+    b.title = label || none;
+    b.setAttribute('aria-label', label || none);
+  };
+  const prev = s.i === 0 ? neighbour(s, -1) : null;
+  const end = atEnd(s);
+  const next = end ? neighbour(s, 1) : null;
+  set(bar.prev, s.i === 0 ? prev && `Previous chapter: ${prev.title}` : `Back ${JUMP} paragraphs`, 'Start of the first chapter');
+  set(bar.next, end ? next && `Next chapter: ${next.title}` : s.gated ? 'Skip the checkpoint' : `Forward ${JUMP} paragraphs`, 'End of the last chapter');
+}
+
+// ---------- media keys, lock screen, headphones ----------
+// Registered once; every handler reads the current state, so nothing goes stale across route changes.
+const actions = {
+  play() {
+    const s = state;
+    if (!s) return;
+    if (!s.open) {
+      if (unlocked) {
+        openBar(s);
+        play(savedPos(s));
+      }
+    } else if (s.gated) resume();
+    else if (!s.playing) toggle();
+  },
+  pause: () => state?.playing && toggle(), // at a checkpoint narration is already waiting: nothing to do
+  playpause: () => (state?.open ? toggle() : actions.play()),
+  stop: () => closeBar(),
+  previoustrack: () => skip(-1),
+  nexttrack: () => skip(1),
+};
+
+let lastAction = { kind: '', at: 0 };
+/** Some platforms deliver one press twice (a media key event and the media session action), and held keys repeat. */
+function media(name) {
+  const kind = name === 'previoustrack' || name === 'nexttrack' ? name : 'playback';
+  const now = performance.now();
+  if (kind === lastAction.kind && now - lastAction.at < REPEAT_MS) return;
+  lastAction = { kind, at: now };
+  actions[name]();
+}
+
+if (session) {
+  for (const name of ['play', 'pause', 'stop', 'previoustrack', 'nexttrack']) {
+    try {
+      session.setActionHandler(name, () => media(name));
+    } catch {
+      /* action not supported here */
+    }
+  }
+  // No seeking: lock screens and headphones then offer previous / next instead of 10-second skips.
+  for (const name of ['seekbackward', 'seekforward', 'seekto']) {
+    try {
+      session.setActionHandler(name, null);
+    } catch {
+      /* action not supported here */
+    }
+  }
+}
+
+const KEYS = { MediaPlayPause: 'playpause', MediaPlay: 'play', MediaPause: 'pause', MediaStop: 'stop', MediaTrackNext: 'nexttrack', MediaTrackPrevious: 'previoustrack' };
+addEventListener('keydown', (e) => {
+  const name = KEYS[e.key];
+  if (!name || !state?.open) return;
+  e.preventDefault();
+  media(name);
+});
+
+// Pauses nobody here asked for (a call, headphones taken out, another app taking the audio): show paused, so
+// the next play goes on from there. Our own pauses set `playing` first or disarm before pausing.
+audio?.addEventListener('pause', () => {
+  const s = state;
+  if (s?.playing && s.armed && !audio.ended) setPlaying(false);
+});
+audio?.addEventListener('play', () => {
+  const s = state;
+  if (s?.open && s.armed && !s.playing && !s.gated) setPlaying(true);
+});
 
 // ---------- checkpoint gates ----------
 /** The gate block s.i has been spoken: wait for the reader at its checkpoint. */
@@ -255,9 +424,9 @@ function gate(s) {
   halt(); // fires 'narration' { playing: false, gated: true }
   savePos(s, s.i + 1);
   const last = s.i + 1 >= s.blocks.length;
-  if (s.label) {
-    s.label.innerHTML = '<span>Your turn</span><span class="tts-wide">: checkpoint</span>';
-    s.live.textContent = `Narration paused. Your turn: answer the checkpoint, then ${last ? 'finish' : 'continue listening'}.`;
+  if (s.open) {
+    bar.label.innerHTML = '<span>Your turn</span><span class="tts-wide">: checkpoint</span>';
+    bar.live.textContent = `Narration paused. Your turn: answer the checkpoint, then ${last ? 'finish' : 'continue listening'}.`;
   }
   const note = h('span', { class: 'tts-gate-note', text: 'Narration paused for this checkpoint.' });
   const btn = h('button', { class: 'btn small ghost tts-continue', html: `${last ? 'Finish listening' : 'Continue listening'} ${icon.arrow}`, onclick: resume });
@@ -271,7 +440,7 @@ function gate(s) {
     ready = now;
     s.gateUI.classList.toggle('ready', now);
     btn.classList.toggle('ghost', !now);
-    s.bPlay?.classList.toggle('ready', now);
+    if (s.open) bar.play.classList.toggle('ready', now);
     note.textContent = now ? 'Checkpoint done.' : 'Narration paused for this checkpoint.';
   };
   s.gateObs = new MutationObserver(check);
@@ -284,8 +453,10 @@ function ungate(s) {
   s.gated = null;
   s.gateObs.disconnect();
   s.gateUI.remove();
-  s.bPlay?.classList.remove('ready');
-  if (s.live) s.live.textContent = '';
+  if (s.open) {
+    bar.play.classList.remove('ready');
+    bar.live.textContent = '';
+  }
   paintPlay(s);
 }
 
@@ -307,9 +478,11 @@ const clip = (src) => {
 let loaded = null; // src whose clip is in the audio element (a section clip holds several blocks)
 
 function setLabel(s) {
+  if (!s.open) return;
   const b = s.blocks[s.i];
-  s.label.textContent = `${s.i + 1} / ${s.blocks.length}`;
-  s.label.title = `Voice: ${b.voice}`;
+  bar.label.textContent = `${s.i + 1} / ${s.blocks.length}`;
+  bar.label.title = `Voice: ${b.voice}`;
+  paintSkip(s);
 }
 
 async function play(i) {
@@ -354,9 +527,11 @@ async function play(i) {
       audio.playbackRate = rate;
       audio.ontimeupdate = () => tick(s);
       audio.onended = () => state === s && (s.gates[s.i] ? gate(s) : play(s.i + 1));
+      s.armed = true; // from here a pause keeps the place in this clip
       await audio.play();
       return;
     } catch {
+      s.armed = false;
       loaded = null;
       if (state !== s || s.i !== i) return; // offline and never heard: fall through to the browser voice
     }
@@ -369,6 +544,14 @@ async function play(i) {
     s.speech = null;
     if (s.gates[i]) gate(s);
     else play(i + 1);
+  };
+  // Paused, resumed or cut off from outside (another tab speaking, the system): follow it, keep the place.
+  u.onpause = () => state === s && s.speech === u && s.playing && setPlaying(false);
+  u.onresume = () => state === s && s.speech === u && !s.playing && setPlaying(true);
+  u.onerror = () => {
+    if (state !== s || s.speech !== u) return;
+    s.speech = null;
+    setPlaying(false);
   };
   s.speech = u;
   speechSynthesis.speak(u);
@@ -442,7 +625,7 @@ function index(s) {
 
 function listenFrom(i) {
   if (!state) return;
-  if (state.bar) play(i);
+  if (state.open) play(i);
   else start(i);
 }
 
@@ -523,7 +706,7 @@ function show(b) {
   const first = els[0];
   if (first) {
     const r = first.getBoundingClientRect();
-    const barTop = state.bar?.getBoundingClientRect().top ?? innerHeight;
+    const barTop = state.open ? bar.el.getBoundingClientRect().top : innerHeight;
     if (r.top < 64 || r.top > barTop - 80) first.scrollIntoView({ behavior: 'smooth', block: r.height > innerHeight * 0.6 ? 'start' : 'center' });
   }
 }
