@@ -15,7 +15,7 @@ import { progress } from './progress.js';
  * `after` (optional frame) is shown once they check, e.g. with the hidden numbers revealed.
  * `View` defaults to Scene; pass TreeView (trees kit) or any class with the same interface.
  * The card keeps its progress: it opens at the first question not answered yet in the current attempt (saved
- * on this device, keyed by the question ids) or, with no attempt saved, after the questions already in the
+ * in localStorage, keyed by the question ids) or, with no attempt saved, after the questions already in the
  * progress; with every question answered it shows the summary.
  */
 export function checkpoint(questions, { title = 'Checkpoint' } = {}) {

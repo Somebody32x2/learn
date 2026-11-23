@@ -13,11 +13,12 @@ function load(key) {
 
 /**
  * Per-question results in localStorage: { [questionId]: true | false }. Correct is never downgraded.
- * Also the answers of each checkpoint's current attempt, so a half-done checkpoint picks up where it was left.
+ * Also the answers of each checkpoint's current attempt ({ [checkpoint key]: { results: [true | false | null], at } }),
+ * so a half-done checkpoint picks up where it was left. Attempts are read from storage every time, so a host
+ * that syncs storage between devices (newest `at` per checkpoint) carries an attempt over.
  */
 export const progress = {
   data: load(KEY),
-  attempts: load(ATTEMPTS), // { [checkpoint key]: { results: [true | false | null], at } }
 
   record(id, correct) {
     if (this.data[id] === true) return;
@@ -32,18 +33,18 @@ export const progress = {
 
   /** Answers of the current attempt at a checkpoint (key: its question ids), or null if none was saved. */
   attempt(key) {
-    const a = this.attempts[key];
+    const a = load(ATTEMPTS)[key];
     return a && Array.isArray(a.results) ? a.results : null;
   },
 
   saveAttempt(key, results) {
-    this.attempts[key] = { results: Array.from(results, (r) => (typeof r === 'boolean' ? r : null)), at: Date.now() };
-    localStorage.setItem(ATTEMPTS, JSON.stringify(this.attempts));
+    const all = load(ATTEMPTS);
+    all[key] = { results: Array.from(results, (r) => (typeof r === 'boolean' ? r : null)), at: Date.now() };
+    localStorage.setItem(ATTEMPTS, JSON.stringify(all));
   },
 
   reset() {
     this.data = {};
-    this.attempts = {};
     localStorage.removeItem(KEY);
     localStorage.removeItem(ATTEMPTS);
     dispatchEvent(new CustomEvent('progress'));

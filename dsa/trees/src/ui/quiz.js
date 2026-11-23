@@ -8,7 +8,7 @@ import { progress } from './progress.js';
  *   { type: 'pick', id, prompt, build: () => ({ frame, answer: [nodeId], after? }), ordered, labels, view, explain }
  * For ordered picks, `labels` names each click in turn (e.g. ['z', 'y', 'x']).
  * The card keeps its progress: it opens at the first question not answered yet in the current attempt (saved
- * on this device, keyed by the question ids) or, with no attempt saved, after the questions already in the
+ * in localStorage, keyed by the question ids) or, with no attempt saved, after the questions already in the
  * progress; with every question answered it shows the summary.
  */
 export function checkpoint(questions, { title = 'Checkpoint' } = {}) {
