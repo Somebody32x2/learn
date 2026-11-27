@@ -7,6 +7,7 @@
  *   node lectern/tts/gen.mjs --dry        counts and characters of what is missing; synthesizes nothing
  *   node lectern/tts/gen.mjs --jobs 4     4 persistent Kokoro workers (default 2); KOKORO_THREADS=n threads per worker
  *   node lectern/tts/gen.mjs --max 10     stop after 10 clips
+ *   node lectern/tts/gen.mjs --redo eigen re-record clips whose say matches /eigen/i (after a pronunciation fix)
  *
  * Every `say` of a scene step and of an interlude beat (`beat.say`) is one clip `<subject>/audio/<key>.mp3`,
  * key = clipKey(course.voice, say) from lectern/src/core/hash.js (the browser computes the same key). Existing
@@ -38,7 +39,9 @@ const dry = args.includes('--dry');
 const maxClips = flag('--max', Infinity);
 const jobs = Math.max(1, flag('--jobs', 2) || 1);
 const threads = Number(process.env.KOKORO_THREADS) || Math.max(2, Math.floor(cpus().length / jobs));
-const only = args.filter((a, i) => !a.startsWith('--') && !['--max', '--jobs'].includes(args[i - 1]));
+const redoArg = args.includes('--redo') ? args[args.indexOf('--redo') + 1] : null;
+const redo = redoArg ? new RegExp(redoArg, 'i') : null;
+const only = args.filter((a, i) => !a.startsWith('--') && !['--max', '--jobs', '--redo'].includes(args[i - 1]));
 
 const execFileP = promisify(execFile);
 const round = (s) => Math.round(s * 100) / 100;
@@ -158,6 +161,22 @@ async function main() {
     const s = await loadSubject(slug);
     if (s) subjects.push(s);
     else console.log(`${slug}: no course.js yet, skipped`);
+  }
+
+  // --redo: drop the matching clips so the run below records them again.
+  if (redo) {
+    let n = 0;
+    for (const s of subjects) {
+      for (const l of s.lectures) {
+        for (const c of l.clips) {
+          const mp3 = join(s.audio, `${c.key}.mp3`);
+          if (!redo.test(c.say) || !existsSync(mp3)) continue;
+          n++;
+          if (!dry) unlinkSync(mp3);
+        }
+      }
+    }
+    console.log(`--redo ${redo}: ${n} clip(s) ${dry ? 'would be' : ''} re-recorded`.replace('  ', ' '));
   }
 
   // Summary of what is missing.

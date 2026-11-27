@@ -2,9 +2,14 @@
   {"out": "/path.wav", "voice": "af_heart", "speed": 1.0, "lang": "en-us",
    "pieces": [{"text": "...", "pause": 300}, ...]}   pause = ms of silence after the piece
 and answers each with one stdout line: {"ok": true, "out": ..., "dur": seconds} or {"ok": false, "error": ...}.
+
+PHONEME_FIXES repairs words espeak phonemizes wrongly, at the phoneme level (spelling tricks in speech.mjs can't
+reach a sound like the hard g of "eigen"). A clip's name doesn't depend on them: after adding one, re-record the
+affected clips with `gen.mjs --redo <regex>`.
 """
 import json
 import os
+import re
 import sys
 
 import numpy as np
@@ -15,6 +20,21 @@ from kokoro_onnx import Kokoro
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODEL = os.environ.get("KOKORO_MODEL", os.path.join(HERE, "models", "kokoro-v1.0.int8.onnx"))
 VOICES = os.path.join(HERE, "models", "voices-v1.0.bin")
+
+# (trigger on the text, phonemes espeak produces, phonemes to use instead)
+PHONEME_FIXES = [
+    (re.compile(r"eigen", re.I), "aɪdʒən", "aɪɡən"),  # eigenvalue: EYE-gun, not EYE-jen
+]
+
+
+def synth(kokoro, text, voice, speed, lang):
+    fixes = [f for f in PHONEME_FIXES if f[0].search(text)]
+    if not fixes:
+        return kokoro.create(text, voice=voice, speed=speed, lang=lang)
+    phonemes = kokoro.tokenizer.phonemize(text, lang)
+    for _, wrong, right in fixes:
+        phonemes = phonemes.replace(wrong, right)
+    return kokoro.create(phonemes, voice=voice, speed=speed, lang=lang, is_phonemes=True)
 
 
 def main():
@@ -32,7 +52,7 @@ def main():
             parts, rate = [], 24000
             for p in job["pieces"]:
                 if p["text"].strip():
-                    samples, rate = kokoro.create(p["text"], voice=job["voice"], speed=job.get("speed", 1.0), lang=job.get("lang", "en-us"))
+                    samples, rate = synth(kokoro, p["text"], job["voice"], job.get("speed", 1.0), job.get("lang", "en-us"))
                     parts.append(samples.astype(np.float32))
                 if p.get("pause"):
                     parts.append(np.zeros(int(rate * p["pause"] / 1000), dtype=np.float32))

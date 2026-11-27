@@ -46,6 +46,7 @@ node lectern/tts/gen.mjs matrix            # only these subjects
 node lectern/tts/gen.mjs --max 10          # stop after 10 clips (index.json is still written)
 node lectern/tts/gen.mjs --jobs 3          # persistent Kokoro workers (default 2, ~740 MB RAM each)
 KOKORO_THREADS=4 node lectern/tts/gen.mjs  # onnxruntime threads per worker (default max(2, cores / jobs))
+node lectern/tts/gen.mjs --redo eigen      # re-record every clip whose say matches /eigen/i
 ```
 
 Each worker (`kokoro_say.py`) loads the model once and takes one JSON job per line. WAVs are made in
@@ -60,8 +61,8 @@ browser computes the same name. Consequences:
 
 - Editing one step's `say` re-records only that step; unchanged lines are never synthesized again.
 - Changing the course voice re-records the course.
-- Pronunciation rules (below) are not part of the key. After changing them, delete the affected mp3s, or bump
-  `VERSION` in `hash.js` to re-record everything.
+- Pronunciation rules (below) are not part of the key. After changing them, re-record the affected clips with
+  `--redo <regex>`, or bump `VERSION` in `hash.js` to re-record everything.
 - Old clips nobody references stay on disk until deleted by hand; `index.json` lists only referenced clips that exist.
 
 ## Text
@@ -71,5 +72,7 @@ browser computes the same name. Consequences:
 - `$tex${words}` is read as `words`; a bare `$…$` is dropped with a warning (and fails the lecture tests).
 - `<short pause>` 300 ms, `<pause>` 600 ms, `<long pause>` 900 ms of silence.
 - `LEX` fixes math vocabulary Kokoro misreads (`RREF` → R-R-E-F, `R^n`/`Rⁿ` → R n, `iff`, `gcd`, `det`, `e.g.`,
-  `i.e.`, `vs.`, …). Add a `[regex, replacement]` row to fix a mispronunciation.
+  `i.e.`, `vs.`, …). Add a `[regex, replacement]` row to fix a mispronunciation that respelling can fix.
+- `PHONEME_FIXES` in `kokoro_say.py` fixes the ones spelling can't reach, at the phoneme level (`eigen` is read
+  with a hard g: espeak says "EYE-jen").
 - Text is split at sentence boundaries into chunks of at most 400 characters (Kokoro truncates longer input).

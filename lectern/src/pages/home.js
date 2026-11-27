@@ -132,8 +132,7 @@ export function renderHome(root, { course, store, bridge, shell }) {
           }))));
 
     const foot = el('footer', { class: 'lx-foot' },
-      el('a', { href: '../', text: 'All subjects' }),
-      el('a', { href: '#/kit', text: 'Authoring kit' }));
+      el('a', { href: '../', text: 'All subjects' }));
 
     page.replaceChildren(...[hero, cont, ...units, foot].filter(Boolean));
   };

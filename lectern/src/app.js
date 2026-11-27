@@ -9,7 +9,7 @@
  *   #/                    course home (pages/home.js)
  *   #/l/<lecture>[/<beat>] lecture player (player/player.js); a beat change inside the same lecture reuses it
  *   #/bank                problem bank (pages/bank.js)
- *   #/kit                 authoring kit (pages/kit.js, loaded on demand)
+ *   #/kit                 authoring kit (pages/kit.js, loaded on demand, not linked)
  *   #/audit[/<lecture>]   layout audit for authors (pages/audit.js, on demand, not linked; report in window.__audit)
  * Each page renders into <main> and returns something with an optional destroy(); document.title follows.
  *
