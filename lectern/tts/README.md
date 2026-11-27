@@ -74,5 +74,67 @@ browser computes the same name. Consequences:
 - `LEX` fixes math vocabulary Kokoro misreads (`RREF` → R-R-E-F, `R^n`/`Rⁿ` → R n, `iff`, `gcd`, `det`, `e.g.`,
   `i.e.`, `vs.`, …). Add a `[regex, replacement]` row to fix a mispronunciation that respelling can fix.
 - `PHONEME_FIXES` in `kokoro_say.py` fixes the ones spelling can't reach, at the phoneme level (`eigen` is read
-  with a hard g: espeak says "EYE-jen").
+  with a hard g: espeak says "EYE-jen"). Both lists are below.
 - Text is split at sentence boundaries into chunks of at most 400 characters (Kokoro truncates longer input).
+
+## Pronunciation
+
+Kokoro's English front end is espeak, which guesses names and rare words. What is fixed (American math usage):
+
+| Word | espeak said | Now | How |
+| --- | --- | --- | --- |
+| eigen… | EYE-jen | EYE-gun | phoneme |
+| letter A / variable a | "uh" (the article) | "ay" | LEX → `Eh`/`eh` where it can't be the article |
+| Lagrange, Lagrangian | LAG-rainj, la-GRANG-ee-an | luh-GRAINJ, luh-GRAHN-jee-an | phoneme |
+| Laplace | LAP-lace | luh-PLAHSS | phoneme |
+| Leibniz | LAYB-nizz | LIBE-nits | phoneme |
+| Cauchy(–Schwarz) | KAW-chee SHWORZ | koh-SHEE SHWORTS | phoneme |
+| Fermat('s) | FER-mat | fair-MAH | phoneme |
+| Bernoulli | BER-now-lee | ber-NOO-lee | phoneme |
+| Dedekind | DED-ih-kind | DAY-duh-kind | phoneme |
+| Fubini | fyoo-BEE-nee | foo-BEE-nee | phoneme |
+| Clairaut('s) | CLAIR-out | clair-OH | phoneme |
+| Pythagorean | PIE-thuh-gor-ee-an | pih-thag-uh-REE-an | phoneme |
+| Archimedean | AR-kih-med-ee-an | ar-kih-MEE-dee-an | phoneme |
+| Casorati | kass-or-AH-ree | kah-zor-AH-tee | phoneme |
+| Bézout | BAY-zout | bay-ZOO | phoneme |
+| Kronecker | KRONE-ker | KRONE-ecker | phoneme |
+| Frenet, Fourier | FREN-it, FOR-ee-er | fruh-NAY, FOOR-ee-ay | phoneme |
+| Heine, Weierstrass | HINE, WEER-strass | HINE-uh, VY-er-shtrahss | phoneme |
+| Jacobian | jack-OH-bee-an | juh-KOH-bee-an | phoneme |
+| Hasse | HASS | HAH-suh | LEX `Hahssa` |
+| Goldbach | GOLD-bakh | GOLD-bahk | LEX `Goldbahk` |
+| Schröder | SHRER-der | SHRAY-der | LEX `Shrayder` |
+| Zermelo, Fraenkel, Peano | zer-MEE-lo, FREEN-kel, PEE-no | zer-MEL-oh, FRENK-el, pee-AH-no | LEX respelling |
+| Möbius | MER-bee-us | MOH-bee-us | LEX `Mobius` |
+| adjugate | uh-JOO-gate | AJ-uh-git | phoneme |
+| cofactor, coprime | KAH-factor, KAH-prime | KOH-factor, koh-PRIME | phoneme |
+| supremum, infimum (suprema, infima) | soo-PREM-um, in-FIM-um | soo-PREE-mum, IN-fih-mum | phoneme |
+| (non)homogeneous | huh-MOJ-nee-us | hoh-muh-JEE-nee-us | phoneme |
+| parallelepiped | PAIR-uh-lel-ih-piped | pair-uh-lel-uh-PIE-pid | phoneme |
+| stochastic | stuh-CHASS-tic | stuh-KASS-tic | phoneme |
+| corollary | kuh-RAH-ler-ee | KOR-uh-lair-ee | phoneme |
+| paraboloid, hyperboloid | PAIR-uh-buh-loid, hy-per-BAH-loid | puh-RAB-uh-loid, hy-PER-buh-loid | phoneme |
+| toroidal | TOR-oid-al | tor-OID-al | phoneme |
+| parametrize, -ization, reparametrize, parameterize | PAIR-uh-meh-trize | puh-RAM-uh-trize | phoneme |
+| extrema, extremum, extremal | ex-TREM-uh | ex-TREE-muh | phoneme |
+| infinitesimal, differentiable, collinear, solenoidal | stress on the wrong syllable | in-fin-ih-TESS-, differ-EN-shuh-, koh-LIN-ee-er, so-luh-NOID- | phoneme |
+| helices | HEL-ih-sez | HEL-ih-seez | LEX `helisees` |
+| jth, kth, nth, mth, pth | J-T-H | jayth, kayth, enth | LEX |
+| xi | "Roman eleven" | zye | LEX |
+| sin, cos, arcsin, arccos, arctan | sin, koss, ARK-sin | sine, cosine, arc sine | LEX |
+| du (in d u d v) | doo | d u | LEX |
+| LU, IH, EVT | loo, eye, evt | L U, I H, E V T | LEX |
+
+Checked and already right: Lay, Euclid(ean), Gram–Schmidt, Cramer, Markov, Cartesian, Hermitian, de Morgan, Zorn,
+Pascal, Fibonacci, Cantor, Cohen, Russell, Venn, Bernstein, Gauss(–Jordan), Euler, Riemann, Stokes, Green, Hessian,
+Thornton, Stewart, Taylor, Newton, Kepler, rho, theta, phi, nabla, del, curl, div, grad, quadric, ellipsoid, cycloid,
+helix, torus, echelon, epsilon, codomain, preimage, injective/surjective/bijective, isomorphism, orthogonal,
+orthonormal, eigen (fixed above), syllogism, modus ponens/tollens, mod, ell, perp.
+
+Adding one: get espeak's phonemes for the word in a sentence
+(`.venv/bin/python -c "from kokoro_onnx.tokenizer import Tokenizer; print(Tokenizer().phonemize('…', 'en-us'))"`),
+try a respelling in `LEX` first and keep it if its phonemes are right, else add a `PHONEME_FIXES` row (trigger
+regex on the text, the exact wrong phoneme substring, the right one; possessives can change the phonemes, so check
+"Fermat's" too). Then re-record the clips whose text triggers it (`--redo`, which matches case-insensitively, so a
+case-sensitive fix like the letter A needs the affected clips deleted by key instead).

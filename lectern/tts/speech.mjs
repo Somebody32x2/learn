@@ -54,6 +54,25 @@ export const LEX = [
   [/\bWLOG\b/g, 'without loss of generality'],
   [/\bWashU\b/g, 'Wash U'],
   [/\bMATH (\d)(\d)(\d)(\d)\b/g, 'math $1 $2 $3 $4'],
+  [/\bLU\b/g, 'L U'],
+  [/\bIH\b/g, 'I H'],
+  [/\bEVT\b/g, 'E V T'],
+  [/\b([jkmnp])th\b/g, (_, l) => ({ j: 'jayth', k: 'kayth', m: 'emth', n: 'enth', p: 'peeth' })[l]],
+  [/\bdu\b/g, 'd u'],
+  [/\barc(sin|cos|tan)\b/g, (_, f) => `arc ${{ sin: 'sine', cos: 'cosine', tan: 'tan' }[f]}`],
+  [/\bsin\b/g, 'sine'],
+  [/\bcos\b/g, 'cosine'],
+  [/\bxi\b/gi, 'zye'],
+  [/\b([uvxyz])([uvxyz])([uvxyz])?(?![\w'’])/g, (_, a, b, c) => [a, b, c].filter(Boolean).join(' ')], // yz-plane: "iz-plane"
+  // Names and words espeak stresses or sounds wrongly that a respelling fixes (the rest: PHONEME_FIXES in kokoro_say.py).
+  [/\bHasse\b/g, 'Hahssa'],
+  [/\bGoldbach\b/g, 'Goldbahk'],
+  [/\bSchr(?:ö|oe)der\b/g, 'Shrayder'],
+  [/\bZermelo\b/g, 'Zermello'],
+  [/\bFraenkel\b/g, 'Frenkel'],
+  [/\bPeano\b/g, 'Peeahno'],
+  [/\bM(?:ö|oe)bius\b/g, 'Mobius'],
+  [/\bhelices\b/gi, 'helisees'],
   // Symbols that slip into plain narration.
   [/(\d)\s*×\s*(\d)/g, '$1 by $2'],
   [/\s*×\s*/g, ' times '],
@@ -64,6 +83,13 @@ export const LEX = [
   [/\s*⇔\s*/g, ' if and only if '],
   [/\s*∈\s*/g, ' in '],
   [/−(?=\d)/g, 'minus '],
+  // The letter A (a matrix, a set) and the variable a: espeak reads them as the article "uh"; "Eh" says the letter.
+  // A capital A inside a sentence is the letter; at a sentence start, and a lowercase a anywhere, only when what
+  // follows can't come after the article (an operator, a verb like "is", another letter, punctuation).
+  [/(?<![.!?:;"“(—]\s*)(?<!^\s*)(?<![\w'’-])A(?![\w'’-])/g, 'Eh'],
+  [/(?<![\w'’-])A(?=(?: (?:is|isn't|equals|times|transpose|inverse|minus(?! sign)|plus(?! sign)|to the|turns|sends|maps|stretches|has|and|or|union|intersect|(?:dot|cross) [A-Za-z]|x|[A-Z]))(?![\w'’-])|\s*[,;:.!?)]|\s*$)/g, 'Eh'],
+  [/(?<![\w'’-])a(?=(?: (?:is|isn't|be|equals|times|minus(?! sign)|plus(?! sign)|over|divides|squared|cubed|to the|and|or|has|mod|sub|in|between|(?:dot|cross) [a-zA-Z]|[b-z](?= (?:equals|plus|minus|times|over|squared|cubed|is|and|or|congruent|divides|tends|to|[a-z]|one|two|three|four)\b|\s*[,;:.!?)]|\s*$)))(?![\w'’-])|\s*[,;:.!?)]|\s*$)/g, 'eh'],
+  [/(?<=(?<![\w'’-])[a-zA-Z] of |\b(?:vectors?|constants?|scalars?) )a(?![\w'’-])/g, 'eh'],
 ];
 
 const TAG = /<\s*(short pause|long pause|pause)\s*>/gi;

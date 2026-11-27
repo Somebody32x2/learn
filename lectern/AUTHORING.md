@@ -116,6 +116,20 @@ recoloring in a step: mark `\part{name}{…}` and `tex.color('name', C.green)`. 
 - Ask, then answer; name the picture before the symbol; "Here's the trap…" for mistakes. No "welcome back".
 - The engine writes row ops as `R_i \to …` (`texRowOp`); say/write the same in your own TeX for consistency.
 
+### Pronunciation
+
+The voice is Kokoro reading what `spoken()` (`lectern/tts/speech.mjs`) makes of your `say`; espeak guesses names
+and rare words. `lectern/tts/README.md` lists what is already fixed (Lagrange, Fubini, Clairaut, Cauchy, Fermat,
+paraboloid, parametrize, extrema, the letter A, …). Write the word normally; never respell it in `say` (captions show
+it). Before you lean on a new name or term, check it:
+`lectern/tts/.venv/bin/python -c "from kokoro_onnx.tokenizer import Tokenizer; print(Tokenizer().phonemize('Your sentence', 'en-us'))"`.
+If it is wrong, add a respelling to `LEX` or a phoneme fix to `PHONEME_FIXES` (README, "Pronunciation").
+- The letter `A`/`a` (a matrix, a set, a variable) is respelled automatically wherever it can't be the article:
+  inside a sentence ("of A", "A x"), before an operator or verb ("a equals b", "A is", "a, b"), and in "f of a". A
+  sentence that starts with the letter A followed by anything else is read "uh": write "The matrix A …" instead.
+- `sin`, `cos`, `arcsin`/`arccos`/`arctan`, `du`, `nth`/`jth`/`kth`, `xi`, `LU`, `IH`, `EVT` are respelled for you;
+  other symbols go into the spoken braces as words ("theta", "rho", "grad f", "del dot F").
+
 ## Interlude recipes
 
 - **try** (choice): 3–4 choices, every one with a `why` naming the misconception; the right one's `why` gives the

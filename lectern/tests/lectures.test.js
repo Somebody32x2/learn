@@ -250,6 +250,9 @@ test('speech: math becomes words, pauses, pronunciation', () => {
   assert.equal(spoken('The det is zero, so determinants vanish.'), 'The determinant is zero, so determinants vanish.');
   assert.equal(spoken('First <pause> then'), 'First. then');
   assert.equal(spoken('First, <short pause> then'), 'First, then');
+  // The letter A / variable a is respelled where it can't be the article.
+  assert.equal(spoken('A is invertible, so A x equals b. A matrix of a and b, where a divides b.'), 'Eh is invertible, so Eh x equals b. A matrix of eh and b, where eh divides b.');
+  assert.equal(spoken('the jth column, arctan of x, Hasse diagrams'), 'the jayth column, arc tan of x, Hahssa diagrams');
   assert.deepEqual(unspokenMath('Fine $a${a} and $b$ and $c${ }'), ['$b$', '$c${ }']);
   assert.deepEqual(unspokenMath('costs 5 $'), ['unpaired $']);
 });
