@@ -70,6 +70,34 @@ export const subjects = [
     // Line-art mark: a charge with field lines, and a light wave.
     art: '<svg viewBox="0 0 160 72" aria-hidden="true"><path d="M30 36H6M30 36h24M30 36 13 19M30 36l17-17M30 36 13 53M30 36l17 17M30 36V8M30 36v28" style="fill:none" /><circle cx="30" cy="36" r="9" class="dot" /><path d="M26 36h8M30 32v8" style="fill:none" /><path d="M72 36c6-24 12-24 18 0s12 24 18 0 12-24 18 0 12 24 18 0" style="fill:none" /><path d="M146 30l8 6-8 6" style="fill:none" /></svg>',
   },
+  {
+    slug: 'matrix',
+    title: 'Matrix Algebra',
+    course: 'MATH 3300 \u00b7 WashU',
+    short: 'Matrix Algebra',
+    blurb:
+      'Narrated lectures you watch like a private class: row reduction you can see, linear maps that bend the plane, determinants as area, eigenvectors that stay on their line, projections and least squares. Every few slides the lecture stops for you to try a problem; skipped ones wait in a bank.',
+    repo: 'https://github.com/Somebody32x2/learn/tree/main/matrix',
+    topics: [
+      { title: 'All lectures', href: 'matrix/', meta: 'Lay, chapters 1\u20137', blurb: 'Linear systems, matrix algebra, determinants, vector spaces, eigenvalues, orthogonality, symmetric matrices.', storage: 'matrix' },
+      { title: 'Problem bank', href: 'matrix/#/bank', meta: 'skipped problems', blurb: 'The work-it-out problems you skipped, ready when you are.' },
+    ],
+    art: '<svg viewBox="0 0 160 72" aria-hidden="true"><path d="M8 6v60M8 6h6M8 66h6M62 6v60M62 6h-6M62 66h-6" style="fill:none" /><rect x="16" y="12" width="12" height="12" rx="2" class="dot" /><rect x="42" y="12" width="12" height="12" rx="2" /><rect x="16" y="48" width="12" height="12" rx="2" /><rect x="42" y="48" width="12" height="12" rx="2" class="dot" /><path d="M84 62 152 62M84 62 84 8" style="fill:none" /><path d="M84 62 116 50M84 62 98 28" style="fill:none" /><path d="M116 50 130 16 98 28" style="fill:none;stroke-dasharray:3 3" /></svg>',
+  },
+  {
+    slug: 'foundations',
+    title: 'Foundations of Higher Math',
+    course: 'MATH 3010 \u00b7 WashU',
+    short: 'Foundations',
+    blurb:
+      'How mathematicians think and write: logic and quantifiers, proofs written live line by line, sets, functions, relations, induction, number theory, counting, and the infinite sizes of sets. Narrated like a 1-on-1, with proof exercises you write yourself.',
+    repo: 'https://github.com/Somebody32x2/learn/tree/main/foundations',
+    topics: [
+      { title: 'All lectures', href: 'foundations/', meta: 'logic to the real numbers', blurb: 'Logic, proof techniques, sets, induction, functions, relations, integers, counting, cardinality, limits.', storage: 'foundations' },
+      { title: 'Problem bank', href: 'foundations/#/bank', meta: 'skipped problems', blurb: 'The proofs and problems you skipped, ready when you are.' },
+    ],
+    art: '<svg viewBox="0 0 160 72" aria-hidden="true"><circle cx="34" cy="36" r="24" style="fill:none" /><circle cx="60" cy="36" r="24" style="fill:none" /><path d="M47 16a24 24 0 0 1 0 40a24 24 0 0 1 0-40z" class="dot" /><path d="M96 14h56M96 30h40M96 46h48M104 62h20" style="fill:none" /><rect x="140" y="56" width="10" height="10" class="dot" /></svg>',
+  },
 ];
 
 /** Study tools that live elsewhere on the same site. Absolute paths: they are not under the hub. */

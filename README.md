@@ -8,6 +8,9 @@ exactly where an answer went wrong. This repo is the hub page plus one folder pe
 | `/` | the hub: lists every subject (`subjects.js`), installable as one app (`manifest.webmanifest`, `sw.js`) |
 | [`dsa/`](dsa/) | Data Structures & Algorithms: AVL trees and rotations, the master theorem, heaps, Dijkstra's algorithm |
 | [`physics2/`](physics2/) | Physics II: fields, circuits, magnetism, light and optics, early quantum physics, with narration |
+| [`matrix/`](matrix/) | Matrix Algebra: narrated, animated lectures following Lay, chapters 1–7, with practice after every idea |
+| [`foundations/`](foundations/) | Foundations of Higher Math: logic, proofs, sets, functions, relations, induction, counting, cardinality, narrated |
+| [`lectern/`](lectern/) | the lecture engine behind `matrix/` and `foundations/` (see `lectern/CONTRACT.md`) |
 
 ## Run locally
 

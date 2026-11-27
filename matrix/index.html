@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Behind a prefix-stripping proxy, /x and /x/ reach the server as the same request; relative URLs
+         only resolve with the slash, so add it before anything else loads. -->
+    <script>if (!/\/$|\.[a-z]+$/i.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
+    <!-- The hub's resume-where-you-left-off script (saves this page; restores its scroll when resuming). -->
+    <script defer src="../resume.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0c0b" media="(prefers-color-scheme: dark)" />
+    <title>Matrix Algebra</title>
+    <meta name="description" content="Matrix Algebra (WashU MATH 3300, Lay's Linear Algebra and Its Applications) as narrated, animated lectures: row reduction, linear maps, determinants, vector spaces, eigenvalues, orthogonality and least squares, with practice after every idea." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%232F3437' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3H3.5v18H6M18 3h2.5v18H18'/%3E%3Crect x='7.5' y='6.5' width='3.5' height='3.5' rx='.8' fill='%23E1F3FE'/%3E%3Crect x='13' y='14' width='3.5' height='3.5' rx='.8' fill='%23E1F3FE'/%3E%3Cpath d='M14.75 8.25h.01M9.25 15.75h.01'/%3E%3C/g%3E%3C/svg%3E" />
+    <!-- Part of the hub one level up: its manifest and service worker cover this site too. -->
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png" />
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../sw.js', { scope: '../' }).catch(() => {});</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+    <!-- Relative paths only: the site must work at a domain root and under a subpath. -->
+    <link rel="stylesheet" href="../lectern/vendor/katex/katex.min.css" />
+    <script defer src="../lectern/vendor/katex/katex.min.js"></script>
+    <link rel="stylesheet" href="../lectern/css/tokens.css" />
+    <link rel="stylesheet" href="../lectern/css/stage.css" />
+    <link rel="stylesheet" href="../lectern/css/stage-logic.css" />
+    <link rel="stylesheet" href="../lectern/css/app.css" />
+    <link rel="stylesheet" href="../lectern/css/interlude.css" />
+    <script type="module">
+      import { boot } from '../lectern/src/app.js';
+      import course from './course.js';
+      boot(course);
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>These lectures are animated and need JavaScript.</noscript>
+  </body>
+</html>

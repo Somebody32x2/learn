@@ -1,0 +1,141 @@
+/*
+ * lectern design tokens. Same warm-monochrome palette and fonts as the Learn hub (styles.css at the hub root);
+ * color is reserved for meaning on the stage. Every lectern stylesheet uses only these variables.
+ */
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --sunk: #f4f3f0;
+  --ink: #2f3437;
+  --ink-strong: #111111;
+  --muted: #787774;
+  --faint: #a5a39e;
+  --line: #eaeaea;
+  --line-strong: #dcdad5;
+  --accent: #1f6c9f;
+  --accent-bg: #e1f3fe;
+  --btn: #111111;
+  --btn-ink: #ffffff;
+  --btn-hover: #333333;
+  --ok: #346538;
+  --ok-bg: #edf3ec;
+  --bad: #9f2f2d;
+  --bad-bg: #fdebec;
+  --warn: #956400;
+  --warn-bg: #fbf3db;
+
+  /* stage palette (manim-like meaning colors, tuned to the hub) */
+  --lx-stage: #ffffff;
+  --lx-ink: #24282b;
+  --lx-ink-bg: rgba(36, 40, 43, 0.06);
+  --lx-muted: #858380;
+  --lx-faint: #c9c7c2;
+  --lx-line: #e7e5e0;
+  --lx-blue: #1f6c9f;   --lx-blue-bg: #e1f3fe;
+  --lx-red: #b8433f;    --lx-red-bg: #fdebec;
+  --lx-green: #3b7a40;  --lx-green-bg: #e8f2e7;
+  --lx-yellow: #b07a00; --lx-yellow-bg: #fbf3db;
+  --lx-purple: #6a55a0; --lx-purple-bg: #efeaf7;
+  --lx-teal: #2f7a70;   --lx-teal-bg: #e3f1ee;
+  --lx-orange: #b0602f; --lx-orange-bg: #fbeee4;
+
+  --sans: 'Geist', 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+  --serif: 'Newsreader', 'Lyon Text', Georgia, serif;
+  --mono: 'Geist Mono', 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* motion (emil-design-eng): strong ease-out for responses, ease-in-out for movement */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --press: scale(0.97);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --bar-h: 64px; /* the fixed control bar */
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0c0b;
+    --surface: #141413;
+    --sunk: #1b1b19;
+    --ink: #d9d8d4;
+    --ink-strong: #f3f2ee;
+    --muted: #8e8c87;
+    --faint: #5f5e5a;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.14);
+    --accent: #7cc0ef;
+    --accent-bg: rgba(124, 192, 239, 0.12);
+    --btn: #f3f2ee;
+    --btn-ink: #111111;
+    --btn-hover: #d9d8d4;
+    --ok: #8cc58f;
+    --ok-bg: rgba(140, 197, 143, 0.12);
+    --bad: #f08a86;
+    --bad-bg: rgba(240, 138, 134, 0.12);
+    --warn: #e2b553;
+    --warn-bg: rgba(226, 181, 83, 0.12);
+
+    --lx-stage: #121211;
+    --lx-ink: #ecebe7;
+    --lx-ink-bg: rgba(236, 235, 231, 0.07);
+    --lx-muted: #8e8c87;
+    --lx-faint: #4a4946;
+    --lx-line: #2a2a28;
+    --lx-blue: #7cc0ef;   --lx-blue-bg: rgba(124, 192, 239, 0.14);
+    --lx-red: #f08a86;    --lx-red-bg: rgba(240, 138, 134, 0.14);
+    --lx-green: #8cc58f;  --lx-green-bg: rgba(140, 197, 143, 0.14);
+    --lx-yellow: #e9bd5c; --lx-yellow-bg: rgba(233, 189, 92, 0.14);
+    --lx-purple: #b9a6ec; --lx-purple-bg: rgba(185, 166, 236, 0.14);
+    --lx-teal: #79c7bb;   --lx-teal-bg: rgba(121, 199, 187, 0.14);
+    --lx-orange: #eda877; --lx-orange-bg: rgba(237, 168, 119, 0.14);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Stage base (layers, mobs). Components add their own rules in css/stage.css. */
+.lx-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 960 / 600;
+  overflow: hidden;
+  background: var(--lx-stage);
+  color: var(--lx-ink);
+  contain: layout paint;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lx-stage-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 960px;
+  height: 600px;
+  transform-origin: 0 0;
+}
+.lx-layer { position: absolute; inset: 0; width: 960px; height: 600px; overflow: visible; }
+.lx-layer-back, .lx-layer-front { pointer-events: none; }
+.lx-layer-html { pointer-events: none; }
+.lx-layer-html > .lx-mob { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+.lx-tex { line-height: 1.2; white-space: nowrap; }
+.lx-tex .katex-display { margin: 0; }
+.lx-text { line-height: 1.3; }
+.lx-sans { font-family: var(--sans); }
+.lx-serif { font-family: var(--serif); }
+.lx-mono { font-family: var(--mono); }
+.lx-layer-back .lx-mob, .lx-layer-front .lx-mob { color: var(--lx-ink); }
+
+/* \col{name}{…} in TeX (core/mobject.js katexHtml) */
+.lx-c-ink { color: var(--lx-ink); }
+.lx-c-muted { color: var(--lx-muted); }
+.lx-c-blue { color: var(--lx-blue); }
+.lx-c-red { color: var(--lx-red); }
+.lx-c-green { color: var(--lx-green); }
+.lx-c-yellow { color: var(--lx-yellow); }
+.lx-c-purple { color: var(--lx-purple); }
+.lx-c-teal { color: var(--lx-teal); }
+.lx-c-orange { color: var(--lx-orange); }
