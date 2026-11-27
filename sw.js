@@ -4,10 +4,11 @@
  * offline afterwards.
  *
  * Same-origin requests are network-first (nothing has hashed file names, so the network is the source of
- * truth) with the cache as the offline fallback. Google Fonts are stale-while-revalidate.
+ * truth) with the cache as the offline fallback. Google Fonts are stale-while-revalidate. `_tutor/` requests
+ * (live endpoints when the site is served by the private tutor, some of them long polls) go straight to the network.
  * Bump VERSION when the shell list changes; old caches are dropped on activate.
  */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = `learn-${VERSION}`;
 const FONTS = 'learn-fonts';
 // Caches this worker may delete: its own old versions. Other apps on the same origin keep theirs.
@@ -56,6 +57,7 @@ self.addEventListener('fetch', (event) => {
   }
   // Only our own path: leave the rest of the origin (and other origins) alone.
   if (url.origin !== location.origin || !url.pathname.startsWith(new URL(self.registration.scope).pathname)) return;
+  if (url.pathname.includes('/_tutor/')) return;
 
   event.respondWith(networkFirst(request, event));
 });
